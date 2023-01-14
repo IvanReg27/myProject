@@ -11,19 +11,35 @@
             crossorigin="anonymous"></script>
 </head>
 <script>
-       const showCitizens = () => {
-        fetch('http://localhost:8081/citizens')
+    const showCitizens = () => {
+        fetch('http://localhost:8080/citizens')
             .then(response => response.json())
             .then(citizens => {
-                citizens.forEach(citizen=>{
-                    console.log(citizen)
-                })
+                citizens.forEach(user => {
+                    $("#citizenGrid").append('<li class="list-group-item">' +
+                        '<div>' + user.birthDate + '</div>' +
+                        '<div>' + user.firstname + '</div>' +
+                        '<div>' + user.id + '</div>' +
+                        '<div>' + user.address + '</div>' +
+                        '<div>' + user.country + '</div>' +
+                        '</li>');
+                });
             })
-       }
+    }
 </script>
 <body>
-<button onclick="showCitizens()"> Press me</button>
-<h1>WORKS</h1>
+<div class="container">
+    <label for="citizenId">Email address</label>
+    <input id="citizenId" placeholder="Put citizen Id here">
+    <button type="button" onclick="showCitizens()" class="p-2 m-2 btn btn-primary">Show citizens</button>
+    <button type="button" onclick="showCitizenById()" class="p-2 m-2 btn btn-primary">Show citizen by id</button>
+    <button type="button" onclick="cleanCitizens()" class="p-2 m-2 btn btn-primary">Clean citizens</button>
+
+    <ul class="list-group" id="citizenGrid">
+    </ul>
+
+</div>
+
 </body>
 
 </html>
