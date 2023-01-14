@@ -16,7 +16,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Configuration
 public class AppContext {
@@ -38,6 +40,15 @@ public class AppContext {
         } catch (IOException e) {
             return null;
         }
+    }
+
+    @Bean("citizensData")
+    public Map<Long,Citizen> citizenMap(List<Citizen> citizens) {
+        Map<Long,Citizen> allCitizens = new HashMap<>();
+        for(Citizen citizen: citizens){
+            allCitizens.put(citizen.getId(), citizen);
+        }
+        return allCitizens;
     }
 
 }

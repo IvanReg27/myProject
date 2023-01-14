@@ -16,7 +16,8 @@
             .then(response => response.json())
             .then(citizens => {
                 citizens.forEach(user => {
-                    $("#citizenGrid").append('<li class="list-group-item">' +
+                    $("#citizenGrid")
+                        .append('<li class="list-group-item">' +
                         '<div>' + user.birthDate + '</div>' +
                         '<div>' + user.firstname + '</div>' +
                         '<div>' + user.id + '</div>' +
@@ -26,6 +27,27 @@
                 });
             })
     }
+
+    const showCitizenById = () => {
+        fetch('http://localhost:8080/citizens/' + $("#citizenId").val())
+            .then(response => response.json())
+            .then(user => {
+                    $("#citizenGrid").append('<li class="list-group-item">' +
+                        '<div>' + user.birthDate + '</div>' +
+                        '<div>' + user.firstname + '</div>' +
+                        '<div>' + user.id + '</div>' +
+                        '<div>' + user.address + '</div>' +
+                        '<div>' + user.country + '</div>' +
+                        '</li>');
+                }
+            )
+            .catch(error => console.log(error));
+    }
+
+    const cleanCitizens = () => {
+        $("#citizenGrid").empty();
+    }
+
 </script>
 <body>
 <div class="container">
