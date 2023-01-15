@@ -29,7 +29,6 @@
     }
 
     const loadAllCountries = () => {
-
         let domain = window.location.origin;
         fetch(domain + '/countries')
             .then(response => response.json())
@@ -43,22 +42,7 @@
     }
 
     const addNewCitizen = () => {
-        const newUser = {
-            firstname: $("#newCitizenNameId").val(),
-            id: $("#newCitizenId").val(),
-            address: $("#newCitizenAddressId").val(),
-            country: $('#allCountriesId').find(":selected").val()
-        };
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newUser)
-        }
-        let domain = window.location.origin;
-        fetch(domain + '/citizens', requestOptions)
-            .then(response => response.json())
-            .then(data => alert('new citizen: ' + JSON.stringify(data) + ' been added!'))
-            .catch(error => alert('error occured during saving new citizen: ' + JSON.stringify(error)));
+    //add missing logic
     }
 
     const reloadPage = () => {
@@ -82,20 +66,7 @@
         <label for="newCitizenNameId">New Citizen Name</label>
         <input id="newCitizenNameId" placeholder="Put new citizen name here">
     </div>
-    <div>
-        <label for="newCitizenId">New Citizen Id</label>
-        <input id="newCitizenId" placeholder="Put new citizen id here">
-    </div>
-    <div>
-        <label for="newCitizenAddressId">New Citizen Address</label>
-        <input id="newCitizenAddressId" placeholder="Put new citizen address here">
-    </div>
-    <div>
-        <label for="allCountriesId">New Citizen Country</label>
-        <select id="allCountriesId">
-        </select>
-    </div>
-
+<!--add missing components-->
     <button type="button" onclick="loadAllCitizens()" class="p-2 m-2 btn btn-primary">Show citizens</button>
     <button type="button" onclick="addNewCitizen()" class="p-2 m-2 btn btn-primary">Add new citizen</button>
     <button type="button" onclick="cleanCitizens()" class="p-2 m-2 btn btn-primary">Clean citizens</button>

@@ -21,8 +21,6 @@ public class AppContext {
     @Value("classpath:citizen10.json")
     Resource citizenResource;
 
-    @Value("classpath:countries.json")
-    Resource countriesResource;
 
     @Bean
     public List<Citizen> citizens() {
@@ -38,14 +36,8 @@ public class AppContext {
 
     @Bean
     public List<Country> countries() {
-        try (InputStream inputStream = countriesResource.getInputStream()) {
-            String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-            final ObjectMapper objectMapper = new ObjectMapper();
-            List<Country> countries = objectMapper.readValue(json, new TypeReference<List<Country>>(){});
-            return countries;
-        } catch (IOException e) {
-            return null;
-        }
+        //add logic
+       return null;
     }
 
 }
