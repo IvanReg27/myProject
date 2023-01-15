@@ -12,7 +12,8 @@
 </head>
 <script>
     const loadAllCitizens = () => {
-        fetch('http://localhost:8080/citizens')
+        let domain = window.location.origin;
+        fetch(domain + '/citizens')
             .then(response => response.json())
             .then(citizens => {
                 citizens.forEach(user => {
@@ -28,7 +29,9 @@
     }
 
     const loadAllCountries = () => {
-        fetch('http://localhost:8080/countries')
+
+        let domain = window.location.origin;
+        fetch(domain + '/countries')
             .then(response => response.json())
             .then(countries => {
                 countries.forEach(country => {
@@ -51,7 +54,8 @@
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newUser)
         }
-        fetch('http://localhost:8080/citizens', requestOptions)
+        let domain = window.location.origin;
+        fetch(domain + '/citizens', requestOptions)
             .then(response => response.json())
             .then(data => alert('new citizen: ' + JSON.stringify(data) + ' been added!'))
             .catch(error => alert('error occured during saving new citizen: ' + JSON.stringify(error)));
