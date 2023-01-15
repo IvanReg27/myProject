@@ -36,7 +36,7 @@ class DemoApplicationTests {
     }
 
     @Test
-    public void testCountries() throws InterruptedException {
+    public void testCountries() {
         Country[] countries = restTemplate.getForObject("http://localhost:" + randomPort + "/countries", Country[].class);
         MatcherAssert.assertThat(countries, is(notNullValue()));
         MatcherAssert.assertThat(countries.length, is(equalTo(6)));
