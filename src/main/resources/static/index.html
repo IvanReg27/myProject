@@ -11,50 +11,89 @@
             crossorigin="anonymous"></script>
 </head>
 <script>
-    const showCitizens = () => {
+    const loadAllCitizens = () => {
         fetch('http://localhost:8080/citizens')
             .then(response => response.json())
             .then(citizens => {
                 citizens.forEach(user => {
                     $("#citizenGrid")
                         .append('<li class="list-group-item">' +
-                        '<div>' + user.birthDate + '</div>' +
-                        '<div>' + user.firstname + '</div>' +
-                        '<div>' + user.id + '</div>' +
-                        '<div>' + user.address + '</div>' +
-                        '<div>' + user.country + '</div>' +
-                        '</li>');
+                            '<div>' + user.firstname + '</div>' +
+                            '<div>' + user.id + '</div>' +
+                            '<div>' + user.address + '</div>' +
+                            '<div>' + user.country + '</div>' +
+                            '</li>');
                 });
             })
     }
 
-    const showCitizenById = () => {
-        fetch('http://localhost:8080/citizens/' + $("#citizenId").val())
+    const loadAllCountries = () => {
+        fetch('http://localhost:8080/countries')
             .then(response => response.json())
-            .then(user => {
-                    $("#citizenGrid").append('<li class="list-group-item">' +
-                        '<div>' + user.birthDate + '</div>' +
-                        '<div>' + user.firstname + '</div>' +
-                        '<div>' + user.id + '</div>' +
-                        '<div>' + user.address + '</div>' +
-                        '<div>' + user.country + '</div>' +
-                        '</li>');
-                }
-            )
-            .catch(error => console.log(error));
+            .then(countries => {
+                countries.forEach(country => {
+                    $('#allCountriesId').append($('<option>', {
+                        text: country.name
+                    }));
+                });
+            })
+    }
+
+    const addNewCitizen = () => {
+        const newUser = {
+            firstname: $("#newCitizenNameId").val(),
+            id: $("#newCitizenId").val(),
+            address: $("#newCitizenAddressId").val(),
+            country: $('#allCountriesId').find(":selected").val()
+        };
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(newUser)
+        }
+        fetch('http://localhost:8080/citizens', requestOptions)
+            .then(response => response.json())
+            .then(data => alert('new citizen: ' + JSON.stringify(data) + ' been added!'))
+            .catch(error => alert('error occured during saving new citizen: ' + JSON.stringify(error)));
+    }
+
+    const reloadPage = () => {
+        cleanCitizens();
+        loadAllCitizens();
     }
 
     const cleanCitizens = () => {
         $("#citizenGrid").empty();
     }
 
+    $(document).ready(function () {
+        loadAllCountries();
+    });
+
 </script>
 <body>
+
 <div class="container">
-    <label for="citizenId">Email address</label>
-    <input id="citizenId" placeholder="Put citizen Id here">
-    <button type="button" onclick="showCitizens()" class="p-2 m-2 btn btn-primary">Show citizens</button>
-    <button type="button" onclick="showCitizenById()" class="p-2 m-2 btn btn-primary">Show citizen by id</button>
+    <div>
+        <label for="newCitizenNameId">New Citizen Name</label>
+        <input id="newCitizenNameId" placeholder="Put new citizen name here">
+    </div>
+    <div>
+        <label for="newCitizenId">New Citizen Id</label>
+        <input id="newCitizenId" placeholder="Put new citizen id here">
+    </div>
+    <div>
+        <label for="newCitizenAddressId">New Citizen Address</label>
+        <input id="newCitizenAddressId" placeholder="Put new citizen address here">
+    </div>
+    <div>
+        <label for="allCountriesId">New Citizen Country</label>
+        <select id="allCountriesId">
+        </select>
+    </div>
+
+    <button type="button" onclick="loadAllCitizens()" class="p-2 m-2 btn btn-primary">Show citizens</button>
+    <button type="button" onclick="addNewCitizen()" class="p-2 m-2 btn btn-primary">Add new citizen</button>
     <button type="button" onclick="cleanCitizens()" class="p-2 m-2 btn btn-primary">Clean citizens</button>
 
     <ul class="list-group" id="citizenGrid">

@@ -5,7 +5,8 @@ import com.vkatit.model.Citizen;
 import com.vkatit.service.CitizenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,12 +18,14 @@ public class CitizenController {
     CitizenService citizenService;
 
     @GetMapping("/citizens")
-    public List<Citizen> getFirst10Citizens() {
-        return citizenService.getFirst10Citizens();
+    public List<Citizen> getAllCitizens() {
+        return citizenService.getAllCitizens();
     }
 
-    @GetMapping("/citizens/{citizenId}")
-    public Citizen getCitizenById(@PathVariable Long citizenId) {
-        return citizenService.getCitizenById(citizenId);
+    @PostMapping("/citizens")
+    public Citizen createNewCitizen(@RequestBody Citizen citizen) {
+        citizenService.addNewCitizen(citizen);
+        return citizen;
     }
+
 }
