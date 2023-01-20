@@ -57,21 +57,6 @@
             .then(data => alert('new citizen: ' + JSON.stringify(data) + ' been added!'))
             .catch(error => alert('error occured during saving new citizen: ' + JSON.stringify(error)));
     }
-    const showCitizenById = () => {
-        fetch('http://localhost:8080/citizens' + $("#citizenId").val())
-            .then(response => response.json())
-            .then(user => {
-                $("#citizenGrid").append('<li class="list-group-item">' +
-                    '<div>' + user.birthDate + '</div>' +
-                    '<div>' + user.firstname + '</div>' +
-                    '<div>' + user.id + '</div>' +
-                    '<div>' + user.address + '</div>' +
-                    '<div>' + user.country + '</div>' +
-                    '</li>');
-                }
-            )
-            .catch(error => console.log(error));
-    }
     const reloadPage = () => {
         cleanCitizens();
         loadAllCitizens();
@@ -99,8 +84,8 @@
         <input id="newCitizenAddressId" placeholder="Put new citizen address here">
     </div>
     <div>
-        <label for="newCountriesId">New Citizen Country</label>
-        <select id="newCountriesId">
+        <label for="allCountriesId">New Citizen Country</label>
+        <select id="allCountriesId">
             <option>UK</option>
             <option>USA</option>
             <option>RUSSIA</option>
