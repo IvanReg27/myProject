@@ -7,21 +7,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
 @Service
 public class CitizenService {
-
     @Autowired
     List<Citizen> citizens;
 
-    @Qualifier("citizensData")
-    @Autowired
-    private Map<Long, Citizen> citizenMap;
+    public void addNewCitizen(Citizen citizen) {
+        citizens.add(citizen);
+    }
+
+//    @Qualifier("citizensData")
+//    @Autowired
+//    private Map<Long, Citizen> citizenMap;
 
     public List<Citizen> getAllCitizens() {
         return citizens;
-    }
-    public Citizen getCitizenById(Long citizenId) {
-        return citizenMap.get(citizenId);
     }
 }
