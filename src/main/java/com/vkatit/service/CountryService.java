@@ -15,5 +15,4 @@ public class CountryService {
     public List<Country> getAllCountries() {
         return countries;
     }
-
 }

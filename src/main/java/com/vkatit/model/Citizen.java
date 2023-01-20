@@ -19,5 +19,4 @@ public class Citizen {
     private String address;
     @JsonProperty("country")
     private String country;
-
 }

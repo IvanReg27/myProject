@@ -15,5 +15,4 @@ public class CitizenService {
     public List<Citizen> getAllCitizens() {
         return citizens;
     }
-
 }
