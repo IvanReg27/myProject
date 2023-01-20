@@ -8,10 +8,8 @@ import java.util.List;
 
 @Service
 public class CountryService {
-
     @Autowired
     List<Country> countries;
-
     public List<Country> getAllCountries() {
         return countries;
     }

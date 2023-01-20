@@ -27,7 +27,6 @@
                 });
             })
     }
-
     const loadAllCountries = () => {
         let domain = window.location.origin;
         fetch(domain + '/countries')
@@ -40,24 +39,49 @@
                 });
             })
     }
-
     const addNewCitizen = () => {
-    //add missing logic
+        const newUser = {
+            firstname: $("#newCitizenNameId").val(),
+            id: $("#newCitizenId").val(),
+            address: $("#newCitizenAddressId").val(),
+            country: $("#allCountriesId").find(":selected").val()
+        };
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(newUser)
+        }
+        let domain = window.location.origin;
+        fetch(domain + '/citizens', requestOptions)
+            .then(response => response.json())
+            .then(data => alert('new citizen: ' + JSON.stringify(data) + ' been added!'))
+            .catch(error => alert('error occured during saving new citizen: ' + JSON.stringify(error)));
     }
-
+    const showCitizenById = () => {
+        fetch('http://localhost:8080/citizens' + $("#citizenId").val())
+            .then(response => response.json())
+            .then(user => {
+                $("#citizenGrid").append('<li class="list-group-item">' +
+                    '<div>' + user.birthDate + '</div>' +
+                    '<div>' + user.firstname + '</div>' +
+                    '<div>' + user.id + '</div>' +
+                    '<div>' + user.address + '</div>' +
+                    '<div>' + user.country + '</div>' +
+                    '</li>');
+                }
+            )
+            .catch(error => console.log(error));
+    }
     const reloadPage = () => {
         cleanCitizens();
         loadAllCitizens();
     }
-
     const cleanCitizens = () => {
         $("#citizenGrid").empty();
     }
-
     $(document).ready(function () {
         loadAllCountries();
     });
-
 </script>
 <body>
 
@@ -66,6 +90,24 @@
         <label for="newCitizenNameId">New Citizen Name</label>
         <input id="newCitizenNameId" placeholder="Put new citizen name here">
     </div>
+    <div>
+        <label for="newCitizenId">New Citizen Id</label>
+        <input id="newCitizenId" placeholder="Put new citizen id here">
+    </div>
+    <div>
+        <label for="newCitizenAddressId">New Citizen Address</label>
+        <input id="newCitizenAddressId" placeholder="Put new citizen address here">
+    </div>
+    <div>
+        <label for="newCountriesId">New Citizen Country</label>
+        <select id="newCountriesId">
+            <option>USA</option>
+            <option>RUSSIA</option>
+            <option>CHINA</option>
+            <option>GERMANY</option>
+            <option>FRANCE</option>
+        </select>
+    </div>
 <!--add missing components-->
     <button type="button" onclick="loadAllCitizens()" class="p-2 m-2 btn btn-primary">Show citizens</button>
     <button type="button" onclick="addNewCitizen()" class="p-2 m-2 btn btn-primary">Add new citizen</button>
@@ -73,9 +115,6 @@
 
     <ul class="list-group" id="citizenGrid">
     </ul>
-
 </div>
-
 </body>
-
 </html>
