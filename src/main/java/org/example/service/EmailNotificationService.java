@@ -30,7 +30,7 @@ public class EmailNotificationService implements NotificationService {
     JSONObject buildJsonMailContent(EmailMessage emailMessage) {
         return new JSONObject()
                 .put(Emailv31.Message.FROM, new JSONObject()
-                        .put("Email", "isicju@gmail.com")
+                        .put("Email", "makhorin0088@gmail.com.com")
                         .put("Name", "Me"))
                 .put(Emailv31.Message.TO, new JSONArray()
                         .put(new JSONObject()
@@ -54,5 +54,4 @@ public class EmailNotificationService implements NotificationService {
             throw new RuntimeException(e);
         }
     }
-
 }

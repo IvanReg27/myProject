@@ -29,5 +29,4 @@ public class StringValidationUtils {
         Matcher matcher = VALID_A_Z.matcher(someString);
         return matcher.find();
     }
-
 }

@@ -12,12 +12,12 @@ public class Controller {
    static Map<DELIVERY_CHANNEL, NotificationService> lookup = new HashMap<>();
 
     public static void init(String[] args) {
-        String emailName = ""; //check  in group
-        String emailPassword = ""; //check  in group
+        String emailName = "53ffc361c9d9692e9060ef89c18f1c11"; //check  in group
+        String emailPassword = "47db15682b550bdf44e2609e94c0dd4a"; //check  in group
         NotificationService emailService =  new EmailNotificationService(emailName, emailPassword);
 
-        String name = ""; //check  in group
-        String password = ""; //check in group
+        String name = "isicju@gmail.com"; //check  in group
+        String password = "MjHqfCWBKh63W12Ognw5aM4XzR"; //check in group
 
         NotificationService smsService = new SmsNotificationService(name, password);
 
@@ -32,6 +32,4 @@ public class Controller {
     enum DELIVERY_CHANNEL {
         SMS, EMAIL, TELEGRAM
     }
-
-
 }

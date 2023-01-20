@@ -59,5 +59,4 @@ public class SmsNotificationService implements NotificationService{
             this.text = text;
         }
     }
-
 }
