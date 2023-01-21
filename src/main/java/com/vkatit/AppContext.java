@@ -21,13 +21,16 @@ public class AppContext {
     @Value("classpath:citizen10.json")
     Resource citizenResource;
 
+    @Value("classpath:countries.json")
+    Resource countryResource;
 
     @Bean
     public List<Citizen> citizens() {
         try (InputStream inputStream = citizenResource.getInputStream()) {
             String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
             final ObjectMapper objectMapper = new ObjectMapper();
-            List<Citizen> citizens = objectMapper.readValue(json, new TypeReference<List<Citizen>>(){});
+            List<Citizen> citizens = objectMapper.readValue(json, new TypeReference<List<Citizen>>() {
+            });
             return citizens;
         } catch (IOException e) {
             return null;
@@ -36,8 +39,15 @@ public class AppContext {
 
     @Bean
     public List<Country> countries() {
-        //add logic
-       return null;
+        try (InputStream inputStream = countryResource.getInputStream()) {
+            String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            final ObjectMapper objectMapper = new ObjectMapper();
+            List<Country> countries = objectMapper.readValue(json, new TypeReference<List<Country>>() {
+            });
+            return countries;
+        } catch (IOException e) {
+            return null;
+        }
     }
 
 }

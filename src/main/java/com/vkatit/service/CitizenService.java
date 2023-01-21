@@ -16,4 +16,8 @@ public class CitizenService {
         return citizens;
     }
 
+    public void addNewCitizen(Citizen citizen) {
+        citizens.add(citizen);
+    }
+
 }
