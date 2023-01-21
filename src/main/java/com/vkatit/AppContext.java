@@ -35,7 +35,7 @@ public class AppContext {
             return null;
         }
     }
-    @Bean//ранее не было!!!
+    @Bean
     public List<Country> countries() {
         try (InputStream inputStream = countriesResource.getInputStream()) {
             String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
