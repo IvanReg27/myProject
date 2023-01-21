@@ -77,9 +77,14 @@
         cleanCitizens();
         loadAllCitizens();
     }
+
     const cleanCitizens = () => {
         $("#citizenGrid").empty();
     }
+
+    $(document).ready(function () {
+        loadAllCountries();
+    });
 </script>
 <body>
     <div class="container text-center my-5">
