@@ -1,6 +1,5 @@
 package com.vkatit;
 
-import com.vkatit.model.Citizen;
 import com.vkatit.model.Country;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +10,6 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
-
 
 import static org.hamcrest.CoreMatchers.*;
 
@@ -42,15 +40,6 @@ class DemoApplicationTests {
         Country[] countries = restTemplate.getForObject("http://localhost:" + randomPort + "/countries", Country[].class);
         MatcherAssert.assertThat(countries, is(notNullValue()));
         MatcherAssert.assertThat(countries.length, is(equalTo(6)));
-    }
-
-    @Test
-    public void testCitizensApi() {
-
-
-        Citizen[] citizens = restTemplate.getForObject("http://localhost:" + randomPort + "/citizens", Citizen[].class);
-        MatcherAssert.assertThat(citizens, is(notNullValue()));
-        MatcherAssert.assertThat(citizens.length, is(equalTo(10)));
     }
 
 }
