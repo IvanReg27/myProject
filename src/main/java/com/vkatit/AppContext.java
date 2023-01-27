@@ -1,6 +1,5 @@
 package com.vkatit;
 
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vkatit.model.Citizen;
@@ -59,9 +58,9 @@ public class AppContext {
     @Bean("mariaDataSource")
     public DataSource mariaDataSource() throws SQLException {
         MariaDbDataSource mariaDbDataSource = new MariaDbDataSource();
-        mariaDbDataSource.setUrl("jdbc:mariadb://IP:3306/hr");
+        mariaDbDataSource.setUrl("jdbc:mariadb://185.106.92.148:3306/hr");
         mariaDbDataSource.setUser("root");
-        mariaDbDataSource.setPassword("");
+        mariaDbDataSource.setPassword("12oCFWg8SU_2");
         return mariaDbDataSource;
     }
 
@@ -69,6 +68,4 @@ public class AppContext {
     public JdbcTemplate myJdbcTemplate(DataSource mariaDataSource) throws SQLException {
         return new JdbcTemplate(mariaDataSource);
     }
-
-
 }

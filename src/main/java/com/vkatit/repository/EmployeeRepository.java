@@ -22,15 +22,15 @@ public class EmployeeRepository {
             @Override
             public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return Employee.builder()
+                        .employeeId(rs.getLong("employee_id"))
                         .firstName(rs.getString("first_name"))
                         .lastName(rs.getString("last_name"))
-                        .mangerId(rs.getInt("manager_id"))
-                        .employeeId(rs.getLong("employee_id"))
                         .hireDate(rs.getString("hire_date"))
                         .jobId(rs.getString("job_id"))
+                        .salary(rs.getFloat("salary"))
+                        .mangerId(rs.getInt("manager_id"))
+                        .departmentId(rs.getInt("department_id"))
                         .build();
             }
         });
-    }
-
-}
+    }}
