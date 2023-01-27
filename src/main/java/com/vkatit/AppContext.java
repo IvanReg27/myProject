@@ -60,7 +60,7 @@ public class AppContext {
         MariaDbDataSource mariaDbDataSource = new MariaDbDataSource();
         mariaDbDataSource.setUrl("jdbc:mariadb://185.106.92.148:3306/hr");
         mariaDbDataSource.setUser("root");
-        mariaDbDataSource.setPassword("12oCFWg8SU_2");
+        mariaDbDataSource.setPassword("xxx"); //ввести пароль HeidiSQL
         return mariaDbDataSource;
     }
 
