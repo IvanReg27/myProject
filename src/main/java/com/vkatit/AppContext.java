@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
 import javax.xml.crypto.Data;
@@ -23,37 +24,12 @@ import java.util.List;
 @Configuration
 public class AppContext {
 
-    @Value("classpath:citizen10.json")
-    Resource citizenResource;
-
-    @Value("classpath:countries.json")
-    Resource countriesResource;
-
-    @Bean
-    public List<Citizen> citizens() {
-        try (InputStream inputStream = citizenResource.getInputStream()) {
-            String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-            final ObjectMapper objectMapper = new ObjectMapper();
-            List<Citizen> citizens = objectMapper.readValue(json, new TypeReference<List<Citizen>>() {
-            });
-            return citizens;
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-    @Bean
-    public List<Country> countries() {
-        try (InputStream inputStream = countriesResource.getInputStream()) {
-            String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-            final ObjectMapper objectMapper = new ObjectMapper();
-            List<Country> countries = objectMapper.readValue(json, new TypeReference<List<Country>>() {
-            });
-            return countries;
-        } catch (IOException e) {
-            return null;
-        }
-    }
+    @Value("${ip}")
+    private String myIp;
+    @Value("${username}")
+    private String myUsername;
+    @Value("${password}")
+    private String myPassword;
 
     @Bean("mariaDataSource")
     public DataSource mariaDataSource() throws SQLException {
@@ -62,6 +38,11 @@ public class AppContext {
         mariaDbDataSource.setUser("root");
         mariaDbDataSource.setPassword("xxx"); //ввести пароль HeidiSQL
         return mariaDbDataSource;
+    }
+
+    @Bean
+    public NamedParameterJdbcTemplate myNamedParameterJdbcTemplate(DataSource mariaDataSource) throws SQLException {
+        return new NamedParameterJdbcTemplate(mariaDataSource);
     }
 
     @Bean

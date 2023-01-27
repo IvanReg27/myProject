@@ -11,9 +11,12 @@ public class Employee {
     private Long employeeId;
     private String firstName;
     private String lastName;
+    private String email;
+    private String phoneNumber;
     private String hireDate;
     private String jobId;
     private Float salary;
-    private Integer mangerId;
-    private Integer departmentId;
+    private Float commissionPct;
+    private Long managerId;
+    private Long departmentId;
 }

@@ -14,65 +14,85 @@
 <script>
     const loadAllEmployees = () => {
         let domain = window.location.origin;
-        fetch(domain + '/citizens')
+        fetch(domain + '/employees')
             .then(response => response.json())
-            .then(citizens => {
-                citizens.forEach(user => {
-                    $("#citizenGrid")
+            .then(employees => {
+                employees.forEach(employee => {
+                    $("#employeeGrid")
                         .append('<li class="list-group-item">' +
-                            '<div>' + user.firstname + '</div>' +
-                            '<div>' + user.id + '</div>' +
-                            '<div>' + user.address + '</div>' +
-                            '<div>' + user.country + '</div>' +
+                            '<div>' + employee.employeeId + '</div>' +
+                            '<div>' + employee.firstName + '</div>' +
+                            '<div>' + employee.lastName + '</div>' +
+                            '<div>' + employee.phoneNumber + '</div>' +
+                            '<div>' + employee.hireDate + '</div>' +
+                            '<div>' + employee.jobId + '</div>' +
+                            '<div>' + employee.salary + '</div>' +
+                            '<div>' + employee.commissionPct + '</div>' +
+                            '<div>' + employee.mangerId + '</div>' +
+                            '<div>' + employee.departmentId + '</div>' +
                             '</li>');
                 });
             })
     }
     const addNewEmployee = () => {
-        const newUser = {
-            firstname: $("#newCitizenNameId").val(),
-            id: $("#newCitizenId").val(),
-            address: $("#newCitizenAddressId").val(),
-            country: $("#allCountriesId").find(":selected").val()
+        const newEmployee = {
+            employeeId: $("#newEmployeeIdId").val(),
+            firstName: $("#newEmployeeFirstNameId").val(),
+            lastName: $("#newEmployeeLastNameId").val(),
+            email: $("#newEmployeeEmailId").val(),
+            phoneNumber: $("#newEmployeePhoneNumberId").val(),
+            hireDate: $("#newEmployeeHireDateId").val(),
+            jobId: $("#newEmployeeJobIdId").val(),
+            salary: $("#newEmployeeSalaryId").val(),
+            commissionPct: $("#newEmployeeCommissionPctId").val(),
+            managerId: $("#newEmployeeManagerIdId").val(),
+            departmentId: $("#newEmployeeDepartmentIdId").val()
         };
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newUser)
+            body: JSON.stringify(newEmployee)
         }
         let domain = window.location.origin;
-        fetch(domain + '/citizens', requestOptions)
+        fetch(domain + '/employees', requestOptions)
             .then(response => response.json())
-            .then(data => alert('new citizen: ' + JSON.stringify(data) + ' been added!'))
+            .then(data => alert('new employee: ' + JSON.stringify(data) + ' been added!'))
             .catch(error => alert('error occurred during saving new employee: ' + JSON.stringify(error)));
     }
-    // const showCitizenById = () => {
-    //     fetch('http://localhost:8080/citizens' + $("#citizenId").val())
-    //         .then(response => response.json())
-    //         .then(user => {
-    //                 $("#citizenGrid").append('<li class="list-group-item">' +
-    //                     '<div>' + user.birthDate + '</div>' +
-    //                     '<div>' + user.firstname + '</div>' +
-    //                     '<div>' + user.id + '</div>' +
-    //                     '<div>' + user.address + '</div>' +
-    //                     '<div>' + user.country + '</div>' +
-    //                     '</li>');
-    //             }
-    //         )
-    //         .catch(error => console.log(error));
-    // }
+    const loadEmployeeById = () => {
+        cleanEmployees();
+        let domain = window.location.origin;
+        let getId = document.getElementById('employeeIdId').value;
+        if (getId !== "") {
+            fetch(domain + '/employees/' + getId)
+                .then(response => response.json())
+                .then(employee => {
+                    $("#employeeGrid")
+                        .append('<tr>' +
+                            '<div>' + employee.employeeId + '</div>' +
+                            '<div>' + employee.firstName + '</div>' +
+                            '<div>' + employee.lastName + '</div>' +
+                            '<div>' + employee.phoneNumber + '</div>' +
+                            '<div>' + employee.hireDate + '</div>' +
+                            '<div>' + employee.jobId + '</div>' +
+                            '<div>' + employee.salary + '</div>' +
+                            '<div>' + employee.commissionPct + '</div>' +
+                            '<div>' + employee.mangerId + '</div>' +
+                            '<div>' + employee.departmentId + '</div>' +
+                            '</li>');
+                });
+        }
+    }
+
     const reloadPage = () => {
         cleanEmployees();
         loadAllEmployees();
     }
 
     const cleanEmployees = () => {
-        $("#citizenGrid").empty();
+        $("#employeeGrid").empty();
     }
 
-    $(document).ready(function () {
-        loadAllEmployees();
-    });
 </script>
 <body>
 <div class="container text-center my-5">
@@ -128,8 +148,8 @@
         </div>
         <div>
             <div class="container my-2">
-                <label for="newCommissionPCT">New commission PCT</label>
-                <input id="newCommissionPCT" placeholder="Put new commission PCT here">
+                <label for="newCommissionPct">New commission PCT</label>
+                <input id="newCommissionPct" placeholder="Put new commission PCT here">
             </div>
         </div>
         <div>
