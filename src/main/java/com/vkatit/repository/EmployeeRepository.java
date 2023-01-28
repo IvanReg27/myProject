@@ -26,22 +26,22 @@ public class EmployeeRepository {
     JdbcTemplate jdbcTemplate;
 
     public void createNewEmployee(Employee employee) {
-        Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put("employee_id", employee.getEmployeeId());
-        properties.put("first_name", employee.getFirstName());
-        properties.put("last_name", employee.getLastName());
-        properties.put("email", employee.getEmail());
-        properties.put("phone_number", employee.getPhoneNumber());
-        properties.put("hire_date", employee.getHireDate());
-        properties.put("job_id", employee.getJobId());
-        properties.put("salary", employee.getSalary());
-        properties.put("commission_pct", employee.getCommissionPct());
-        properties.put("manager_id", employee.getManagerId());
-        properties.put("department_id", employee.getDepartmentId());
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("employee_id", employee.getEmployeeId());
+        parameters.put("first_name", employee.getFirstName());
+        parameters.put("last_name", employee.getLastName());
+        parameters.put("email", employee.getEmail());
+        parameters.put("phone_number", employee.getPhoneNumber());
+        parameters.put("hire_date", employee.getHireDate());
+        parameters.put("job_id", employee.getJobId());
+        parameters.put("salary", employee.getSalary());
+        parameters.put("commission_pct", employee.getCommissionPct());
+        parameters.put("manager_id", employee.getManagerId());
+        parameters.put("department_id", employee.getDepartmentId());
 
         namedParameterJdbcTemplate.update(
                 "INSERT INTO hr.employees(employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, commission_pct, manager_id, department_id) VALUES (:employee_id, :first_name, :last_name, :email, :phone_number, :hire_date, :job_id, :salary, :commission_pct, :manager_id, :department_id)",
-                properties
+                parameters
         );
     }
 
@@ -53,9 +53,12 @@ public class EmployeeRepository {
                         .employeeId(rs.getLong("employee_id"))
                         .firstName(rs.getString("first_name"))
                         .lastName(rs.getString("last_name"))
+                        .email(rs.getString("email"))
+                        .phoneNumber(rs.getString("phone_number"))
                         .hireDate(rs.getString("hire_date"))
                         .jobId(rs.getString("job_id"))
                         .salary(rs.getFloat("salary"))
+                        .commissionPct(rs.getFloat("commission_pct"))
                         .managerId(rs.getLong("manager_id"))
                         .departmentId(rs.getLong("department_id"))
                         .build();
@@ -72,7 +75,7 @@ public class EmployeeRepository {
                         .lastName(rs.getString("last_name"))
                         .email(rs.getString("email"))
                         .phoneNumber(rs.getString("phone_number"))
-                        .hireDate(String.valueOf(rs.getDate("hire_date")))
+                        .hireDate(rs.getString("hire_date"))
                         .jobId(rs.getString("job_id"))
                         .salary(rs.getFloat("salary"))
                         .commissionPct(rs.getFloat("commission_pct"))

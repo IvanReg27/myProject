@@ -19,21 +19,48 @@
             .then(employees => {
                 employees.forEach(employee => {
                     $("#employeeGrid")
-                        .append('<li class="list-group-item">' +
+                        .append('<tr>' +
                             '<div>' + employee.employeeId + '</div>' +
                             '<div>' + employee.firstName + '</div>' +
                             '<div>' + employee.lastName + '</div>' +
+                            '<div>' + employee.email + '</div>' +
                             '<div>' + employee.phoneNumber + '</div>' +
                             '<div>' + employee.hireDate + '</div>' +
                             '<div>' + employee.jobId + '</div>' +
                             '<div>' + employee.salary + '</div>' +
                             '<div>' + employee.commissionPct + '</div>' +
-                            '<div>' + employee.mangerId + '</div>' +
+                            '<div>' + employee.managerId + '</div>' +
                             '<div>' + employee.departmentId + '</div>' +
-                            '</li>');
+                            '</tr>');
                 });
             })
     }
+    const loadEmployeeById = () => {
+        cleanEmployees();
+        let domain = window.location.origin;
+        let getId = document.getElementById('employeeIdId').value;
+        if (getId !== "") {
+            fetch(domain + '/employees/' + getId)
+                .then(response => response.json())
+                .then(employee => {
+                    $("#employeeGrid")
+                        .append('<tr>' +
+                            '<div>' + employee.employeeId + '</div>' +
+                            '<div>' + employee.firstName + '</div>' +
+                            '<div>' + employee.lastName + '</div>' +
+                            '<div>' + employee.email + '</div>' +
+                            '<div>' + employee.phoneNumber + '</div>' +
+                            '<div>' + employee.hireDate + '</div>' +
+                            '<div>' + employee.jobId + '</div>' +
+                            '<div>' + employee.salary + '</div>' +
+                            '<div>' + employee.commissionPct + '</div>' +
+                            '<div>' + employee.managerId + '</div>' +
+                            '<div>' + employee.departmentId + '</div>' +
+                            '</tr>');
+                });
+        }
+    }
+
     const addNewEmployee = () => {
         const newEmployee = {
             employeeId: $("#newEmployeeIdId").val(),
@@ -59,30 +86,7 @@
             .then(data => alert('new employee: ' + JSON.stringify(data) + ' been added!'))
             .catch(error => alert('error occurred during saving new employee: ' + JSON.stringify(error)));
     }
-    const loadEmployeeById = () => {
-        cleanEmployees();
-        let domain = window.location.origin;
-        let getId = document.getElementById('employeeIdId').value;
-        if (getId !== "") {
-            fetch(domain + '/employees/' + getId)
-                .then(response => response.json())
-                .then(employee => {
-                    $("#employeeGrid")
-                        .append('<tr>' +
-                            '<div>' + employee.employeeId + '</div>' +
-                            '<div>' + employee.firstName + '</div>' +
-                            '<div>' + employee.lastName + '</div>' +
-                            '<div>' + employee.phoneNumber + '</div>' +
-                            '<div>' + employee.hireDate + '</div>' +
-                            '<div>' + employee.jobId + '</div>' +
-                            '<div>' + employee.salary + '</div>' +
-                            '<div>' + employee.commissionPct + '</div>' +
-                            '<div>' + employee.mangerId + '</div>' +
-                            '<div>' + employee.departmentId + '</div>' +
-                            '</li>');
-                });
-        }
-    }
+
 
     const reloadPage = () => {
         cleanEmployees();

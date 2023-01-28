@@ -1,25 +1,14 @@
 package com.vkatit;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vkatit.model.Citizen;
-import com.vkatit.model.Country;
 import org.mariadb.jdbc.MariaDbDataSource;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
-import javax.xml.crypto.Data;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
-import java.util.List;
 
 @Configuration
 public class AppContext {
@@ -36,7 +25,7 @@ public class AppContext {
         MariaDbDataSource mariaDbDataSource = new MariaDbDataSource();
         mariaDbDataSource.setUrl("jdbc:mariadb://xxx/hr"); // мой IP сервера
         mariaDbDataSource.setUser("root");
-        mariaDbDataSource.setPassword("xxx"); //ввести пароль HeidiSQL
+        mariaDbDataSource.setPassword("xxx2"); //ввести пароль HeidiSQL
         return mariaDbDataSource;
     }
 

@@ -1,6 +1,5 @@
 package com.vkatit;
 
-import com.vkatit.model.Country;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
