@@ -13,19 +13,19 @@ import java.sql.SQLException;
 @Configuration
 public class AppContext {
 
-    @Value("${ip}")
-    private String myIp;
-    @Value("${username}")
-    private String myUsername;
-    @Value("${password}")
-    private String myPassword;
+//    @Value("${ip}")
+//    private String myIp;
+//    @Value("${username}")
+//    private String myUsername;
+//    @Value("${password}")
+//    private String myPassword;
 
     @Bean("mariaDataSource")
     public DataSource mariaDataSource() throws SQLException {
         MariaDbDataSource mariaDbDataSource = new MariaDbDataSource();
-        mariaDbDataSource.setUrl("jdbc:mariadb://xxx/hr"); // мой IP сервера
+        mariaDbDataSource.setUrl("jdbc:mariadb://xxx:3306/hr"); // мой IP сервера
         mariaDbDataSource.setUser("root");
-        mariaDbDataSource.setPassword("xxx2"); //ввести пароль HeidiSQL
+        mariaDbDataSource.setPassword("xxx"); //ввести пароль HeidiSQL
         return mariaDbDataSource;
     }
 

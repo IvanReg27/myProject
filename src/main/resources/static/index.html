@@ -13,24 +13,25 @@
 </head>
 <script>
     const loadAllEmployees = () => {
+        cleanEmployees()
         let domain = window.location.origin;
         fetch(domain + '/employees')
             .then(response => response.json())
             .then(employees => {
                 employees.forEach(employee => {
-                    $("#employeeGrid")
+                    $("#employeeGridBody")
                         .append('<tr>' +
-                            '<div>' + employee.employeeId + '</div>' +
-                            '<div>' + employee.firstName + '</div>' +
-                            '<div>' + employee.lastName + '</div>' +
-                            '<div>' + employee.email + '</div>' +
-                            '<div>' + employee.phoneNumber + '</div>' +
-                            '<div>' + employee.hireDate + '</div>' +
-                            '<div>' + employee.jobId + '</div>' +
-                            '<div>' + employee.salary + '</div>' +
-                            '<div>' + employee.commissionPct + '</div>' +
-                            '<div>' + employee.managerId + '</div>' +
-                            '<div>' + employee.departmentId + '</div>' +
+                            '<th>' + employee.employeeId + '</th>' +
+                            '<td>' + employee.firstName + '</td>' +
+                            '<td>' + employee.lastName + '</td>' +
+                            '<td>' + employee.email + '</td>' +
+                            '<td>' + employee.phoneNumber + '</td>' +
+                            '<td>' + employee.hireDate + '</td>' +
+                            '<td>' + employee.jobId + '</td>' +
+                            '<td>' + employee.salary + '</td>' +
+                            '<td>' + employee.commissionPct + '</td>' +
+                            '<td>' + employee.managerId + '</td>' +
+                            '<td>' + employee.departmentId + '</td>' +
                             '</tr>');
                 });
             })
@@ -45,17 +46,17 @@
                 .then(employee => {
                     $("#employeeGrid")
                         .append('<tr>' +
-                            '<div>' + employee.employeeId + '</div>' +
-                            '<div>' + employee.firstName + '</div>' +
-                            '<div>' + employee.lastName + '</div>' +
-                            '<div>' + employee.email + '</div>' +
-                            '<div>' + employee.phoneNumber + '</div>' +
-                            '<div>' + employee.hireDate + '</div>' +
-                            '<div>' + employee.jobId + '</div>' +
-                            '<div>' + employee.salary + '</div>' +
-                            '<div>' + employee.commissionPct + '</div>' +
-                            '<div>' + employee.managerId + '</div>' +
-                            '<div>' + employee.departmentId + '</div>' +
+                            '<th>' + employee.employeeId + '</th>' +
+                            '<td>' + employee.firstName + '</td>' +
+                            '<td>' + employee.lastName + '</td>' +
+                            '<td>' + employee.email + '</td>' +
+                            '<td>' + employee.phoneNumber + '</td>' +
+                            '<td>' + employee.hireDate + '</td>' +
+                            '<td>' + employee.jobId + '</td>' +
+                            '<td>' + employee.salary + '</td>' +
+                            '<td>' + employee.commissionPct + '</td>' +
+                            '<td>' + employee.managerId + '</td>' +
+                            '<td>' + employee.departmentId + '</td>' +
                             '</tr>');
                 });
         }
@@ -75,16 +76,18 @@
             managerId: $("#newEmployeeManagerIdId").val(),
             departmentId: $("#newEmployeeDepartmentIdId").val()
         };
-        const requestOptions = {
+        const request = {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(newEmployee)
-        }
+        };
         let domain = window.location.origin;
-        fetch(domain + '/employees', requestOptions)
+        fetch(domain + '/employees', request)
             .then(response => response.json())
             .then(data => alert('new employee: ' + JSON.stringify(data) + ' been added!'))
-            .catch(error => alert('error occurred during saving new employee: ' + JSON.stringify(error)));
+//            .catch(error => alert('error occurred during saving new employee: ' + JSON.stringify(error)));
     }
 
 
@@ -94,7 +97,7 @@
     }
 
     const cleanEmployees = () => {
-        $("#employeeGrid").empty();
+        $("#employeeGridBody").empty();
     }
 
 </script>
@@ -174,8 +177,27 @@
         <button type="button" onclick="addNewEmployee()" class="p-2 m-2 btn btn-primary">Add new employee</button>
         <button type="button" onclick="cleanEmployees()" class="p-2 m-2 btn btn-primary">Clean employees</button>
 
-        <ul class="list-group" id="citizenGrid">
-        </ul>
+        <div>
+            <table class="table table-bordered" style="table-layout: fixed; width: 1700px; margin: 0 auto" id="employeeGrid">
+                <thead id="employeeGridHead">
+                <tr>
+                    <th>employee_id</th>
+                    <th>first_name</th>
+                    <th>last_name</th>
+                    <th>email</th>
+                    <th>phone_number</th>
+                    <th>hire_date</th>
+                    <th>job_id</th>
+                    <th>salary</th>
+                    <th>commission_pct</th>
+                    <th>manager_id</th>
+                    <th>department_id</th>
+                </tr>
+                </thead>
+                <tbody id="employeeGridBody">
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>

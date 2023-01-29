@@ -1,10 +1,7 @@
 package com.vkatit.repository;
 
-import com.sun.crypto.provider.GCM;
 import com.vkatit.model.Employee;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -38,7 +35,6 @@ public class EmployeeRepository {
         parameters.put("commission_pct", employee.getCommissionPct());
         parameters.put("manager_id", employee.getManagerId());
         parameters.put("department_id", employee.getDepartmentId());
-
         namedParameterJdbcTemplate.update(
                 "INSERT INTO hr.employees(employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, commission_pct, manager_id, department_id) VALUES (:employee_id, :first_name, :last_name, :email, :phone_number, :hire_date, :job_id, :salary, :commission_pct, :manager_id, :department_id)",
                 parameters
@@ -55,7 +51,7 @@ public class EmployeeRepository {
                         .lastName(rs.getString("last_name"))
                         .email(rs.getString("email"))
                         .phoneNumber(rs.getString("phone_number"))
-                        .hireDate(rs.getString("hire_date"))
+                        .hireDate(rs.getDate("hire_date"))
                         .jobId(rs.getString("job_id"))
                         .salary(rs.getFloat("salary"))
                         .commissionPct(rs.getFloat("commission_pct"))
@@ -75,7 +71,7 @@ public class EmployeeRepository {
                         .lastName(rs.getString("last_name"))
                         .email(rs.getString("email"))
                         .phoneNumber(rs.getString("phone_number"))
-                        .hireDate(rs.getString("hire_date"))
+                        .hireDate(rs.getDate("hire_date"))
                         .jobId(rs.getString("job_id"))
                         .salary(rs.getFloat("salary"))
                         .commissionPct(rs.getFloat("commission_pct"))
