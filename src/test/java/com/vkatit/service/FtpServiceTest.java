@@ -1,4 +1,4 @@
-package com.vkatit;
+package com.vkatit.service;
 
 import com.vkatit.service.ftp.FtpService;
 import org.apache.ftpserver.FtpServer;
@@ -31,9 +31,9 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TestConfig.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class DemoApplicationTests {
+class FtpServiceTest {
     @LocalServerPort
     int randomPort;
     RestTemplate restTemplate;
@@ -86,7 +86,6 @@ class DemoApplicationTests {
         FtpServer server = factory.createServer();
         server.start();
     }
-
 
     @Test
     void contextLoads() {

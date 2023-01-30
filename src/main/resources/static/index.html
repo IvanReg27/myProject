@@ -11,68 +11,90 @@
             crossorigin="anonymous"></script>
 </head>
 <script>
-    const loadAllCitizens = () => {
+
+    const uploadImage = () => {
+
+
+        postData().then(response => {
+            if(response.status === 201){
+                alert("new image was added!");
+            }else{
+                alert("image wasn't added!");
+            }
+        });
+
+    }
+
+    async function postData() {
+        const form = document.getElementById('imageFormId');
+        const formData = new FormData(form);
+
+        const requestOptions = {
+            method: 'POST',
+            body: formData
+        }
         let domain = window.location.origin;
-        fetch(domain + '/citizens')
-            .then(response => response.json())
-            .then(citizens => {
-                citizens.forEach(user => {
-                    $("#citizenGrid")
-                        .append('<li class="list-group-item">' +
-                            '<div>' + user.firstname + '</div>' +
-                            '<div>' + user.id + '</div>' +
-                            '<div>' + user.address + '</div>' +
-                            '<div>' + user.country + '</div>' +
-                            '</li>');
-                });
-            })
+
+        return  await   fetch(domain + '/images', requestOptions);
     }
 
-    const loadAllCountries = () => {
-        let domain = window.location.origin;
-        fetch(domain + '/countries')
-            .then(response => response.json())
-            .then(countries => {
-                countries.forEach(country => {
-                    $('#allCountriesId').append($('<option>', {
-                        text: country.name
-                    }));
-                });
-            })
+</script>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<script>
+    window.onload = function () {
+
+//Better to construct options first and then pass it as a parameter
+        var options = {
+            title: {
+                text: "Spline Chart with Export as Image"
+            },
+            animationEnabled: true,
+            exportEnabled: true,
+            data: [
+                {
+                    type: "spline", //change it to line, area, column, pie, etc
+                    dataPoints: [
+                        { x: 10, y: 10, label: 'IT' },
+                        { x: 20, y: 12 },
+                        { x: 30, y: 8 },
+                        { x: 40, y: 14 },
+                        { x: 50, y: 6 },
+                        { x: 60, y: 24 },
+                        { x: 70, y: -4 },
+                        { x: 80, y: 10 }
+                    ]
+                }
+            ]
+        };
+        $("#chartContainer").CanvasJSChart(options);
+
     }
-
-    const addNewCitizen = () => {
-    //add missing logic
-    }
-
-    const reloadPage = () => {
-        cleanCitizens();
-        loadAllCitizens();
-    }
-
-    const cleanCitizens = () => {
-        $("#citizenGrid").empty();
-    }
-
-    $(document).ready(function () {
-        loadAllCountries();
-    });
-
 </script>
 <body>
 
 <div class="container">
-    <div>
-        <label for="newCitizenNameId">New Citizen Name</label>
-        <input id="newCitizenNameId" placeholder="Put new citizen name here">
-    </div>
-<!--add missing components-->
-    <button type="button" onclick="loadAllCitizens()" class="p-2 m-2 btn btn-primary">Show citizens</button>
-    <button type="button" onclick="addNewCitizen()" class="p-2 m-2 btn btn-primary">Add new citizen</button>
-    <button type="button" onclick="cleanCitizens()" class="p-2 m-2 btn btn-primary">Clean citizens</button>
+
+    <!DOCTYPE HTML>
+    <html>
+    <head>
+
+    </head>
+    <body>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+    </body>
+
+
+    <button type="button" onclick="uploadImage()" class="p-2 m-2 btn btn-primary">UPLOAD IMAGE</button>
 
     <ul class="list-group" id="citizenGrid">
     </ul>
+
+    <!--    <img src="/files/keke.jpeg">-->
+    <form id="imageFormId" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file"/><br/><br/>
+    </form>
 
 </div>
 

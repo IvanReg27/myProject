@@ -3,20 +3,18 @@ package com.vkatit;
 import com.vkatit.service.ftp.FtpService;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
-import org.apache.ftpserver.ftplet.*;
+import org.apache.ftpserver.ftplet.Authority;
+import org.apache.ftpserver.ftplet.FtpException;
+import org.apache.ftpserver.ftplet.UserManager;
 import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
-import org.apache.ftpserver.usermanager.SaltedPasswordEncryptor;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
-import org.apache.ftpserver.usermanager.impl.ConcurrentLoginPermission;
 import org.apache.ftpserver.usermanager.impl.TransferRatePermission;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,16 +22,27 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TestConfig.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class DemoApplicationTests {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class ImageControllerUnit {
     @LocalServerPort
     int randomPort;
     RestTemplate restTemplate;
@@ -61,8 +70,13 @@ class DemoApplicationTests {
     @Autowired
     ApplicationContext applicationContext;
 
-    @BeforeAll
-    public void start() throws FtpException {
+    @Test
+    void contextLoads() {
+        assertThat(applicationContext, is(notNullValue()));
+    }
+
+    @Test
+    public void testCountries() throws FtpException, IOException {
         PropertiesUserManagerFactory userManagerFactory = new PropertiesUserManagerFactory();
         UserManager userManager = userManagerFactory.createUserManager();
         BaseUser user = new BaseUser();
@@ -85,18 +99,37 @@ class DemoApplicationTests {
 
         FtpServer server = factory.createServer();
         server.start();
-    }
+
+        MultiValueMap<String, Object> body
+                = new LinkedMultiValueMap<>();
+        body.add("file", new FileSystemResource("C:\\keke.jpeg"));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+        HttpEntity<MultiValueMap<String, Object>> requestEntity
+                = new HttpEntity<>(body, headers);
+        String serverUrl = "http://localhost:" + randomPort + "/images";
+        System.out.println(serverUrl);
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate
+                .postForEntity(serverUrl, requestEntity, String.class);
+        System.out.println(response);
+
+        ResponseEntity<byte[]> responseAfter = restTemplate
+                .getForEntity(serverUrl + "/"+ "keke.jpeg", byte[].class);
+
+        byte[] expectedBytes = Files.readAllBytes(new File("C:\\keke.jpeg").toPath());
+        byte[] actualBytes = responseAfter.getBody();
+//        assertEquals(expectedBytes, actualBytes);
+
+        assertThat(expectedBytes, is(equalTo(actualBytes)));
 
 
-    @Test
-    void contextLoads() {
-        MatcherAssert.assertThat(applicationContext, is(notNullValue()));
-    }
+        System.out.println(responseAfter);
 
-    @Test
-    public void testCountries() {
-        ftpService.saveFile(new byte[]{0, 1}, "test1");
-        MatcherAssert.assertThat(ftpService.readFile("test1"), is(equalTo(new byte[]{0, 1})));
+//        ftpService.saveFile(new byte[]{0, 1}, "test1");
+//        MatcherAssert.assertThat(ftpService.readFile("test1"), is(equalTo(new byte[]{0, 1})));
     }
 
 }

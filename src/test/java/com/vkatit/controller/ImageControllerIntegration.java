@@ -1,22 +1,20 @@
-package com.vkatit;
+package com.vkatit.controller;
 
 import com.vkatit.service.ftp.FtpService;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
-import org.apache.ftpserver.ftplet.*;
+import org.apache.ftpserver.ftplet.Authority;
+import org.apache.ftpserver.ftplet.FtpException;
+import org.apache.ftpserver.ftplet.UserManager;
 import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
-import org.apache.ftpserver.usermanager.SaltedPasswordEncryptor;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
-import org.apache.ftpserver.usermanager.impl.ConcurrentLoginPermission;
 import org.apache.ftpserver.usermanager.impl.TransferRatePermission;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,9 +29,10 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TestConfig.class)
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class DemoApplicationTests {
+class ImageControllerIntegration {
     @LocalServerPort
     int randomPort;
     RestTemplate restTemplate;
@@ -87,7 +86,6 @@ class DemoApplicationTests {
         server.start();
     }
 
-
     @Test
     void contextLoads() {
         MatcherAssert.assertThat(applicationContext, is(notNullValue()));
@@ -95,8 +93,10 @@ class DemoApplicationTests {
 
     @Test
     public void testCountries() {
-        ftpService.saveFile(new byte[]{0, 1}, "test1");
-        MatcherAssert.assertThat(ftpService.readFile("test1"), is(equalTo(new byte[]{0, 1})));
+
+        restTemplate.postForEntity("http://localhost:" + randomPort + "/images",null, String.class);
+
+
     }
 
 }
