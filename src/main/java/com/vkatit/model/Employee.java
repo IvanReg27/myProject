@@ -2,6 +2,7 @@ package com.vkatit.model;
 
 import lombok.Builder;
 import lombok.Data;
+
 import java.sql.Date;
 
 @Builder
@@ -13,7 +14,7 @@ public class Employee {
     private String lastName;
     private String email;
     private String phoneNumber;
-    private String hireDate;
+    private Date hireDate;
     private String jobId;
     private Float salary;
     private Float commissionPct;

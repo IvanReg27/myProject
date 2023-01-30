@@ -1,7 +1,6 @@
 package com.vkatit;
 
 import org.mariadb.jdbc.MariaDbDataSource;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,9 +22,9 @@ public class AppContext {
     @Bean("mariaDataSource")
     public DataSource mariaDataSource() throws SQLException {
         MariaDbDataSource mariaDbDataSource = new MariaDbDataSource();
-        mariaDbDataSource.setUrl("jdbc:mariadb://xxx:3306/hr"); // мой IP сервера
+        mariaDbDataSource.setUrl("jdbc:mariadb://185.106.92.148:3306/hr"); // мой IP сервера
         mariaDbDataSource.setUser("root");
-        mariaDbDataSource.setPassword("xxx"); //ввести пароль HeidiSQL
+        mariaDbDataSource.setPassword("12oCFWg8SU_2"); //ввести пароль HeidiSQL
         return mariaDbDataSource;
     }
 
