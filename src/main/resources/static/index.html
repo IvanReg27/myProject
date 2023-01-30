@@ -64,17 +64,17 @@
 
     const addNewEmployee = () => {
         const newEmployee = {
-            employeeId: $("#newEmployeeIdId").val(),
-            firstName: $("#newEmployeeFirstNameId").val(),
-            lastName: $("#newEmployeeLastNameId").val(),
-            email: $("#newEmployeeEmailId").val(),
-            phoneNumber: $("#newEmployeePhoneNumberId").val(),
-            hireDate: $("#newEmployeeHireDateId").val(),
-            jobId: $("#newEmployeeJobIdId").val(),
-            salary: $("#newEmployeeSalaryId").val(),
-            commissionPct: $("#newEmployeeCommissionPctId").val(),
-            managerId: $("#newEmployeeManagerIdId").val(),
-            departmentId: $("#newEmployeeDepartmentIdId").val()
+            employeeId: $("#newEmployeeId").val(),
+            firstName: $("#newFirstName").val(),
+            lastName: $("#newLastName").val(),
+            email: $("#newEmail").val(),
+            phoneNumber: $("#newPhoneNumber").val(),
+            hireDate: $("#newHireDate").val(),
+            jobId: $("#newJobId").val(),
+            salary: $("#newSalary").val(),
+            commissionPct: $("#newCommissionPct").val(),
+            managerId: $("#newManagerId").val(),
+            departmentId: $("#newDepartmentId").val()
         };
         const request = {
             method: 'POST',
@@ -174,7 +174,7 @@
 
         <!--add missing components-->
         <button type="button" onclick="loadAllEmployees()" class="p-2 m-2 btn btn-primary">Show employees</button>
-        <button type="button" onclick="loadEmployeeById()" class="p-2 m-2 btn btn-primary">Show employee by ID</button>
+        <!--<button type="button" onclick="loadEmployeeById()" class="p-2 m-2 btn btn-primary">Show employee by ID</button>-->
         <button type="button" onclick="addNewEmployee()" class="p-2 m-2 btn btn-primary">Add new employee</button>
         <button type="button" onclick="cleanEmployees()" class="p-2 m-2 btn btn-primary">Clean employees</button>
 
