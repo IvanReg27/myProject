@@ -1,5 +1,6 @@
 package com.vkatit;
 
+import com.vkatit.model.Employee;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,7 @@ class DemoApplicationTests {
 
     @Test
     public void testCountries() {
-        Country[] countries = restTemplate.getForObject("http://localhost:" + randomPort + "/countries", Country[].class);
+        Employee[] countries = restTemplate.getForObject("http://localhost:" + randomPort + "/employees", Employee[].class);
         MatcherAssert.assertThat(countries, is(notNullValue()));
         MatcherAssert.assertThat(countries.length, is(equalTo(6)));
     }

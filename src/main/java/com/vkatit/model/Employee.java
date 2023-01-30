@@ -13,7 +13,7 @@ public class Employee {
     private String lastName;
     private String email;
     private String phoneNumber;
-    private Date hireDate;
+    private String hireDate;
     private String jobId;
     private Float salary;
     private Float commissionPct;
