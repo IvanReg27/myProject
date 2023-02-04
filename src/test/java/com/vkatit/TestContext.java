@@ -1,6 +1,5 @@
-package com.vkatit.controller;
+package com.vkatit;
 
-import com.vkatit.service.ftp.FtpService;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
 import org.apache.ftpserver.ftplet.Authority;
@@ -11,36 +10,18 @@ import org.apache.ftpserver.usermanager.PropertiesUserManagerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
 import org.apache.ftpserver.usermanager.impl.TransferRatePermission;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
-import org.hamcrest.MatcherAssert;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.env.Environment;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
-
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class ImageControllerIntegration {
-    @LocalServerPort
-    int randomPort;
-    RestTemplate restTemplate;
-
-    @BeforeEach
-    public void init() {
-        restTemplate = new RestTemplate();
-    }
+@TestConfiguration
+public class TestContext {
 
     @Value("${ftp.testfolder}")
     String folder;
@@ -51,17 +32,9 @@ class ImageControllerIntegration {
     @Value("${ftp.user}")
     String username;
 
-    @Autowired
-    FtpService ftpService;
-
-    @Autowired
-    Environment environment;
-
-    @Autowired
-    ApplicationContext applicationContext;
-
-    @BeforeAll
-    public void start() throws FtpException {
+    @Scope(SCOPE_PROTOTYPE)
+    @Bean("testFtpServer")
+    FtpServer embeddedFtpServer() throws FtpException {
         PropertiesUserManagerFactory userManagerFactory = new PropertiesUserManagerFactory();
         UserManager userManager = userManagerFactory.createUserManager();
         BaseUser user = new BaseUser();
@@ -82,21 +55,7 @@ class ImageControllerIntegration {
         factory.setUserManager(userManager);
         factory.addListener("default", listenerFactory.createListener());
 
-        FtpServer server = factory.createServer();
-        server.start();
-    }
-
-    @Test
-    void contextLoads() {
-        MatcherAssert.assertThat(applicationContext, is(notNullValue()));
-    }
-
-    @Test
-    public void testCountries() {
-
-        restTemplate.postForEntity("http://localhost:" + randomPort + "/images",null, String.class);
-
-
+        return factory.createServer();
     }
 
 }
