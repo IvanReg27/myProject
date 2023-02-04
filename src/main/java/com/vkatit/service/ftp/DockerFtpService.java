@@ -1,13 +1,14 @@
 package com.vkatit.service.ftp;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+@Service
 public class DockerFtpService implements FtpService{
 
     @Value("${ftp.host}")
@@ -50,7 +51,6 @@ public class DockerFtpService implements FtpService{
             System.out.println(e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
-
         try (OutputStream outputStream = urlConnection.getOutputStream();) {
             outputStream.write(bytes);
             outputStream.flush();
