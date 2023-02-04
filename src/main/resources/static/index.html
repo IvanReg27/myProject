@@ -11,18 +11,14 @@
             crossorigin="anonymous"></script>
 </head>
 <script>
-
     const uploadImage = () => {
-
-
         postData().then(response => {
-            if(response.status === 201){
+            if (response.status === 201) {
                 alert("new image was added!");
-            }else{
+            } else {
                 alert("image wasn't added!");
             }
         });
-
     }
 
     async function postData() {
@@ -34,64 +30,18 @@
             body: formData
         }
         let domain = window.location.origin;
-
-        return  await   fetch(domain + '/images', requestOptions);
-    }
-
-</script>
-<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-<script>
-    window.onload = function () {
-
-//Better to construct options first and then pass it as a parameter
-        var options = {
-            title: {
-                text: "Spline Chart with Export as Image"
-            },
-            animationEnabled: true,
-            exportEnabled: true,
-            data: [
-                {
-                    type: "spline", //change it to line, area, column, pie, etc
-                    dataPoints: [
-                        { x: 10, y: 10, label: 'IT' },
-                        { x: 20, y: 12 },
-                        { x: 30, y: 8 },
-                        { x: 40, y: 14 },
-                        { x: 50, y: 6 },
-                        { x: 60, y: 24 },
-                        { x: 70, y: -4 },
-                        { x: 80, y: 10 }
-                    ]
-                }
-            ]
-        };
-        $("#chartContainer").CanvasJSChart(options);
-
+        return await fetch(domain + '/images', requestOptions);
     }
 </script>
 <body>
 
-<div class="container">
-
-    <!DOCTYPE HTML>
-    <html>
-    <head>
-
-    </head>
-    <body>
-    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-
-    </body>
-
+<div>
 
     <button type="button" onclick="uploadImage()" class="p-2 m-2 btn btn-primary">UPLOAD IMAGE</button>
 
     <ul class="list-group" id="citizenGrid">
     </ul>
 
-    <!--    <img src="/files/keke.jpeg">-->
     <form id="imageFormId" method="POST" enctype="multipart/form-data">
         <input type="file" name="file"/><br/><br/>
     </form>
