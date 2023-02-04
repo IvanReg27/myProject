@@ -2,6 +2,7 @@ package com.vkatit.service;
 
 import com.vkatit.model.Citizen;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,11 +10,21 @@ import java.util.List;
 @Service
 public class CitizenService {
 
+    @Qualifier("citizenList")
     @Autowired
-    List<Citizen> citizens;
+    List<Citizen> citizenList;
 
     public List<Citizen> getAllCitizens() {
-        return citizens;
+        return citizenList;
+    }
+
+    public Citizen getCitizenById(Long id){
+        for (Citizen citizen: citizenList){
+            if (citizen.getId().equals(id) ){
+                return citizen;
+            }
+        }
+        return null;
     }
 
 }

@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class ImageController {
 
-    @Qualifier("dockerFtpService")
     @Autowired
     FtpService ftpService;
 

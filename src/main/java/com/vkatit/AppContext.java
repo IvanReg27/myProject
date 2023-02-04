@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -25,8 +26,7 @@ public class AppContext {
     @Value("classpath:citizen10.json")
     Resource citizenResource;
 
-
-    @Bean
+    @Bean("citizenList")
     public List<Citizen> citizens() {
         try (InputStream inputStream = citizenResource.getInputStream()) {
             String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
