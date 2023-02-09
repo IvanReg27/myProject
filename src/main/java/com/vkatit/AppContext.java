@@ -22,51 +22,24 @@ import java.util.List;
 @Configuration
 public class AppContext {
 
-    @Value("classpath:citizen10.json")
-    Resource citizenResource;
+    @Value("${ip}")
+    private String myIp;
+    @Value("${username}")
+    private String myUsername;
+    @Value("${password}")
+    private String myPassword;
 
-    @Value("classpath:countries.json")
-    Resource countriesResource;
-
-    @Bean
-    public List<Citizen> citizens() {
-        try (InputStream inputStream = citizenResource.getInputStream()) {
-            String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-            final ObjectMapper objectMapper = new ObjectMapper();
-            List<Citizen> citizens = objectMapper.readValue(json, new TypeReference<List<Citizen>>() {
-            });
-            return citizens;
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-    @Bean
-    public List<Country> countries() {
-        try (InputStream inputStream = countriesResource.getInputStream()) {
-            String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-            final ObjectMapper objectMapper = new ObjectMapper();
-            List<Country> countries = objectMapper.readValue(json, new TypeReference<List<Country>>() {
-            });
-            return countries;
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-    @Bean("mariaDataSource")
-    public DataSource mariaDataSource() throws SQLException {
-        MariaDbDataSource mariaDbDataSource = new MariaDbDataSource();
-        mariaDbDataSource.setUrl("jdbc:mariadb://IP:3306/hr");
-        mariaDbDataSource.setUser("root");
-        mariaDbDataSource.setPassword("");
+    @Bean ("mariaDataSource")
+public DataSource mariaDataSource() throws SQLException {
+    MariaDbDataSource mariaDbDataSource = new MariaDbDataSource();
+    mariaDbDataSource.setUrl("jdbc:mariadb://" + myIp + "/hr"); //ставить свой Ip адрес и порт
+        mariaDbDataSource.setUser(myUsername);
+        mariaDbDataSource.setPassword(myPassword);
         return mariaDbDataSource;
-    }
+}
 
     @Bean
-    public JdbcTemplate myJdbcTemplate(DataSource mariaDataSource) throws SQLException {
-        return new JdbcTemplate(mariaDataSource);
+public JdbcTemplate myJdbcTemplate(DataSource mariaDataSource) throws SQLException {
+    return new JdbcTemplate(mariaDataSource);
     }
-
-
 }

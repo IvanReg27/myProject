@@ -1,6 +1,5 @@
 package com.vkatit;
 
-import com.vkatit.repository.EmployeeRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -8,12 +7,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class DemoApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
-
-        System.out.println(context.getBean("employeeRepository", EmployeeRepository.class).getEmployeeById(104L));;
-
     }
-
 }
-//commit

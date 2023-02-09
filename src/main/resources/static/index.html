@@ -11,97 +11,103 @@
             crossorigin="anonymous"></script>
 </head>
 <script>
-    const loadAllCitizens = () => {
+
+    const loadAllEmployees = () => {
         let domain = window.location.origin;
-        fetch(domain + '/citizens')
+        fetch(domain + '/employees')
             .then(response => response.json())
-            .then(citizens => {
-                citizens.forEach(user => {
-                    $("#citizenGrid")
-                        .append('<li class="list-group-item">' +
-                            '<div>' + user.firstname + '</div>' +
-                            '<div>' + user.id + '</div>' +
-                            '<div>' + user.address + '</div>' +
-                            '<div>' + user.country + '</div>' +
-                            '</li>');
-                });
+            .then(employees => {
+                for (const [key, value] of Object.entries(employees)) {
+                    $("#employeeGridBody")
+                        .append('<tr>' +
+                            '<th>' + '<a href="' + domain + '/employee_details.html?id=' + value.employeeId +
+                            '" target="_blank">' + value.employeeId + '</a>' + '</th>' +
+                            '<td>' + value.firstName + '</td>' +
+                            '<td>' + value.lastName + '</td>' +
+                            '</tr>');
+                }
             })
     }
 
-    const loadAllCountries = () => {
-
+    const loadEmployeesByRequest = () => {
+        cleanEmployees();
         let domain = window.location.origin;
-        fetch(domain + '/countries')
+        let searchRequest = document.getElementById('employeeSearchREQUESTiD').value;
+        if (searchRequest.length === 4) {
+        fetch(domain + '/employees/' + searchRequest)
             .then(response => response.json())
-            .then(countries => {
-                countries.forEach(country => {
-                    $('#allCountriesId').append($('<option>', {
-                        text: country.name
-                    }));
-                });
+            .then(employees => {
+                for (const [key, value] of Object.entries(employees)) {
+                    $("#employeeSearchGridBody")
+                        .append('<tr>' +
+                            '<th>' + value.employeeId + '</th>' +
+                            '<td>' + value.firstName + '</td>' +
+                            '<td>' + value.lastName + '</td>' +
+                            '<td>' + value.streetAddress + '</td>' +
+                            '</tr>');
+                }
             })
-    }
-
-    const addNewCitizen = () => {
-        const newUser = {
-            firstname: $("#newCitizenNameId").val(),
-            id: $("#newCitizenId").val(),
-            address: $("#newCitizenAddressId").val(),
-            country: $('#allCountriesId').find(":selected").val()
-        };
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newUser)
+        } else {
+            alert('enter four characters to search');
         }
-        let domain = window.location.origin;
-        fetch(domain + '/citizens', requestOptions)
-            .then(response => response.json())
-            .then(data => alert('new citizen: ' + JSON.stringify(data) + ' been added!'))
-            .catch(error => alert('error occured during saving new citizen: ' + JSON.stringify(error)));
     }
 
-    const reloadPage = () => {
-        cleanCitizens();
-        loadAllCitizens();
+    const cleanEmployees = () => {
+        $("#employeeSearchGridBody").empty();
     }
-
-    const cleanCitizens = () => {
-        $("#citizenGrid").empty();
-    }
-
-    $(document).ready(function () {
-        loadAllCountries();
-    });
-
 </script>
-<body>
+<body onload="loadAllEmployees()">
 
-<div class="container">
-    <div>
-        <label for="newCitizenNameId">New Citizen Name</label>
-        <input id="newCitizenNameId" placeholder="Put new citizen name here">
-    </div>
-    <div>
-        <label for="newCitizenId">New Citizen Id</label>
-        <input id="newCitizenId" placeholder="Put new citizen id here">
-    </div>
-    <div>
-        <label for="newCitizenAddressId">New Citizen Address</label>
-        <input id="newCitizenAddressId" placeholder="Put new citizen address here">
-    </div>
-    <div>
-        <label for="allCountriesId">New Citizen Country</label>
-        <select id="allCountriesId">
-        </select>
+<div style="display:flex; justify-content: space-between">
+    <div style="width: 300px">
+        <table class="table table-striped" id="employeeGrid">
+            <thead id="employeeGridHead">
+            <tr>
+                <th>Employee ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+            </thead>
+            <tbody id="employeeGridBody">
+            </tbody>
+        </table>
     </div>
 
-    <button type="button" onclick="loadAllCitizens()" class="p-2 m-2 btn btn-primary">Show citizens</button>
-    <button type="button" onclick="addNewCitizen()" class="p-2 m-2 btn btn-primary">Add new citizen</button>
-    <button type="button" onclick="cleanCitizens()" class="p-2 m-2 btn btn-primary">Clean citizens</button>
+    <div style="width: 1000px">
+        <div>
+            <input style="width: 100%" id="employeeSearchRequestId" placeholder="Enter employee search here">
+        </div>
 
-    <ul class="list-group" id="citizenGrid">
-    </ul>
+        <div style="display: flex; justify-content: space-around; width: 1000px; margin: 0 auto">
+            <button type="button" onclick="loadEmployeesByRequest(); this.blur();" class="p-2 m-2 btn btn-secondary">
+                Search employees
+            </button>
+
+            <button type="button" onclick="cleanEmployees(); this.blur();" class="p-2 m-2 btn btn-secondary">
+                Clean employees
+            </button>
+        </div>
+
+        <div>
+            <table class="table table-striped" id="employeeSearchGrid">
+                <thead id="employeeSearchGridHead">
+                <tr>
+                    <th>Employee ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+                </thead>
+                <tbody id="employeeSearchGridBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <a href="/chart.html" style="width: 300px" onclick="this.blur();" class="p-2 m-2 btn btn-danger" role="button" target="_blank">
+            Salaries chart employees
+        </a>
+    </div>
 
 </div>
 
