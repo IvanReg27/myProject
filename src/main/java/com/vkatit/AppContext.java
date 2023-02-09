@@ -1,40 +1,30 @@
 package com.vkatit;
 
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vkatit.model.Citizen;
-import com.vkatit.model.Country;
 import org.mariadb.jdbc.MariaDbDataSource;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
-import java.util.List;
 
 @Configuration
 public class AppContext {
 
-    @Value("${ip}")
-    private String myIp;
-    @Value("${username}")
-    private String myUsername;
-    @Value("${password}")
-    private String myPassword;
+    //@Value("${ip}")
+    //private String myIp;
+    //@Value("${username}")
+    //private String myUsername;
+    //@Value("${password}")
+    //private String myPassword;
 
     @Bean ("mariaDataSource")
 public DataSource mariaDataSource() throws SQLException {
     MariaDbDataSource mariaDbDataSource = new MariaDbDataSource();
-    mariaDbDataSource.setUrl("jdbc:mariadb://" + myIp + "/hr"); //ставить свой Ip адрес и порт
+    mariaDbDataSource.setUrl("jdbc:mariadb://185.106.92.148:3306/hr"); //вставить свой Ip адрес и порт
         mariaDbDataSource.setUser("root");
-        mariaDbDataSource.setPassword("xxx");
+        mariaDbDataSource.setPassword("12oCFWg8SU_2"); //вставить свой пароль из HeidiSQL
         return mariaDbDataSource;
 }
 
