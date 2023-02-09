@@ -10,13 +10,17 @@ import java.sql.Date;
 @Data
 public class Employee {
 
+    private Long employeeId;
     private String firstName;
     private String lastName;
-    private String hireDate;
-    private String jobId;
+    private String email;
+    private Date hireDate;
     private Float salary;
-    private Integer mangerId;
-    private Integer departmentId;
-    private Long employeeId;
-
+    private String jobTitle;
+    private String departmentName;
+    private String streetAddress;
+    private String postalCode;
+    private String city;
+    private String countryName;
+    private String regionName;
 }

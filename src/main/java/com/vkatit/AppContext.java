@@ -33,8 +33,8 @@ public class AppContext {
 public DataSource mariaDataSource() throws SQLException {
     MariaDbDataSource mariaDbDataSource = new MariaDbDataSource();
     mariaDbDataSource.setUrl("jdbc:mariadb://" + myIp + "/hr"); //ставить свой Ip адрес и порт
-        mariaDbDataSource.setUser(myUsername);
-        mariaDbDataSource.setPassword(myPassword);
+        mariaDbDataSource.setUser("root");
+        mariaDbDataSource.setPassword("xxx");
         return mariaDbDataSource;
 }
 

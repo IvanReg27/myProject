@@ -1,8 +1,8 @@
 package com.vkatit.repository;
 
 import com.vkatit.model.Employee;
+import com.vkatit.model.Job;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
@@ -85,16 +85,16 @@ public class EmployeeRepository {
         });
     }
 
-    public Map<String, BatchProperties.Job> getChartData() {
+    public Map<String, Job> getChartData() {
         return jdbcTemplate.query("SELECT hr.jobs.job_id, hr.jobs.job_title, AVG(hr.employees.salary)\n" +
                 "FROM hr.jobs\n" +
                 "JOIN hr.employees ON hr.jobs.job_id = hr.employees.job_id\n" +
                 "GROUP BY hr.jobs.job_title", new ResultSetExtractor<Map>() {
             @Override
             public Map extractData(ResultSet rs) throws SQLException {
-                HashMap<String, BatchProperties.Job> map = new HashMap<>();
+                HashMap<String, Job> map = new HashMap<>();
                 while(rs.next()){
-                    map.put(rs.getString("job_id"), BatchProperties.Job.builder()
+                    map.put(rs.getString("job_id"), Job.builder()
                             .jobTitle(rs.getString("job_title"))
                             .averageSalary(rs.getFloat("avg(hr.employees.salary)"))
                             .build());
@@ -103,5 +103,4 @@ public class EmployeeRepository {
             }
         });
     }
-
 }
