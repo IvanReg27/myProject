@@ -22,9 +22,9 @@ public class AppContext {
     @Bean ("mariaDataSource")
 public DataSource mariaDataSource() throws SQLException {
     MariaDbDataSource mariaDbDataSource = new MariaDbDataSource();
-    mariaDbDataSource.setUrl("jdbc:mariadb://185.106.92.148:3306/hr"); //вставить свой Ip адрес и порт
+    mariaDbDataSource.setUrl("jdbc:mariadb://xxx:3306/hr"); //вставить свой Ip адрес и порт
         mariaDbDataSource.setUser("root");
-        mariaDbDataSource.setPassword("12oCFWg8SU_2"); //вставить свой пароль из HeidiSQL
+        mariaDbDataSource.setPassword("xxx"); //вставить свой пароль из HeidiSQL
         return mariaDbDataSource;
 }
 
