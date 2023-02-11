@@ -16,7 +16,7 @@ public class AppContext {
 public DataSource mariaDataSource() throws SQLException {
     MariaDbDataSource mariaDbDataSource = new MariaDbDataSource();
     mariaDbDataSource.setUrl("jdbc:mariadb://xxx:3306/hr"); //вставить свой Ip адрес и порт
-        mariaDbDataSource.setUser("root");
+        mariaDbDataSource.setUser("root"); //имя
         mariaDbDataSource.setPassword("xxx"); //вставить свой пароль из HeidiSQL
         return mariaDbDataSource;
 }
