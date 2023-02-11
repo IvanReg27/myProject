@@ -12,13 +12,6 @@ import java.sql.SQLException;
 @Configuration
 public class AppContext {
 
-    //@Value("${ip}")
-    //private String myIp;
-    //@Value("${username}")
-    //private String myUsername;
-    //@Value("${password}")
-    //private String myPassword;
-
     @Bean ("mariaDataSource")
 public DataSource mariaDataSource() throws SQLException {
     MariaDbDataSource mariaDbDataSource = new MariaDbDataSource();
