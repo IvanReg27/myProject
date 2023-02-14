@@ -23,7 +23,7 @@ import java.util.List;
 @Configuration
 public class AppContext {
 
-    @Value("classpath:citizen10.json")
+    @Value("classpath:citizen1000.json")
     Resource citizenResource;
 
     @Bean("citizenList")
