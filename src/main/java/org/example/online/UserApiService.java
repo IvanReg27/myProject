@@ -1,7 +1,6 @@
 package org.example.online;
 
 import org.example.lesson7.api.User;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +21,4 @@ public class UserApiService {
     public List<User> getUsers() {
         return users;
     }
-
-
 }

@@ -31,5 +31,4 @@ public class TaxService {
         if (user.getMonthOfWork() == null) throw new UserValidationException(" work duration is empty!", user);
         if (user.getYearIncome() == null) throw new UserValidationException(" year income is empty!", user);
     }
-
 }

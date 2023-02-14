@@ -110,6 +110,4 @@ public class ListService<E> {
         long after = System.currentTimeMillis();
         return after - before;
     }
-
-
 }

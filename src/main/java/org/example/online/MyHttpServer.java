@@ -5,12 +5,10 @@ import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import org.example.httpserver.CityApi;
 import org.example.lesson7.api.UserApi;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
-
 import static org.example.utils.DataUtil.getFileAsByteArray;
 
 class myHttpServer {
@@ -57,4 +55,3 @@ class myHttpServer {
         os.close();
     }
 }
-

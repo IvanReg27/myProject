@@ -54,6 +54,4 @@ public class CityApi {
     
     public static CityApi getInstance() {
         return instance;
-    }
-    
-}
+    }}

@@ -3,7 +3,6 @@ package org.example.lesson7.api;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.example.utils.DataUtil;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,6 @@ public class UserApi {
 
     private List<User> initUsersFromJson() {
         Type listType = new TypeToken<ArrayList<User>>() {}.getType();
-
         String validJson = DataUtil.getFileAsString("USER_DATA.json");
         Gson gson = new Gson();
         return gson.fromJson(validJson, listType);
@@ -32,5 +30,4 @@ public class UserApi {
     public static UserApi getInstance(){
         return instance;
     }
-
 }
