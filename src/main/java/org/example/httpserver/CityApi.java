@@ -17,8 +17,7 @@ public class CityApi {
             throw new RuntimeException(e);
         }
     }
-
-//    private List<City> cities;
+//private List<City> cities;
     private List<City> onlyFirst100cities;
     
     private CityApi() throws IOException {
@@ -54,4 +53,5 @@ public class CityApi {
     
     public static CityApi getInstance() {
         return instance;
-    }}
+    }
+}

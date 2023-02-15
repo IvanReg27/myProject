@@ -22,7 +22,7 @@ public class CityApi_2 {
 //        System.out.println(cityRondom100.size());
 //        System.out.println(getAllCity().size());
 //        for (int i = 0; i < cityRondom100.size(); ++i) {
-////            for (City city : n) {
+//            for (City city : n) {
 //            System.out.print("City: " + getAllCity().get(i));
 //            System.out.print(" Longitude: " + City.getLongitude());
 //            System.out.println(" Latitude: " + City.getLatitude());
@@ -49,7 +49,6 @@ public class CityApi_2 {
         }
         System.out.printf("ArrayList has %d elements \n", cityList100.size());
         
-        
         // System.out.println((new Gson().toJson(city.getCities())).getBytes(StandardCharsets.UTF_8));
         
         return cityList100;
@@ -68,7 +67,6 @@ public class CityApi_2 {
             return linesInFile;
         }
     }
-    
     
 //    public static CityApi getInstance() {
 //        return instance;

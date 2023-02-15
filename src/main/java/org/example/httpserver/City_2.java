@@ -10,5 +10,4 @@ public class City_2 {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-
 }
