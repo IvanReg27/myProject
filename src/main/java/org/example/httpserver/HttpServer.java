@@ -12,6 +12,7 @@ public class HttpServer {
 
         //создал объект URL
         final URL url = new URL("http://185.106.92.99:8080/users");
+        System.out.println("Listening for connection on port 8080...");
         //открыл на основании объекта URL соединение
         final HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
@@ -28,6 +29,7 @@ public class HttpServer {
                 //для листа преобразовал данные в объект
                 ArrayList<String> users = new ArrayList<>();
                 users.add(String.valueOf(content));
+                System.out.println("Content add to ArrayList...");
 
                 System.out.println(users);
             }
