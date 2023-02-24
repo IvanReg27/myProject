@@ -25,7 +25,7 @@ public class HttpServer {
                 System.out.println(content);
 
                 //полученную стрингу положил в коллекцию лист
-                //и преобразовал данные в объект
+                //для листа преобразовал данные в объект
                 ArrayList<String> users = new ArrayList<>();
                 users.add(String.valueOf(content));
 
