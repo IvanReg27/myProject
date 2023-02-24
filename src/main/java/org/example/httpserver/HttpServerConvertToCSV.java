@@ -1,9 +1,6 @@
 package org.example.httpserver;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -11,28 +8,31 @@ public class HttpServerConvertToCSV {
 
     public static void main(String[] args) throws IOException {
 
-        String line = "";
-        String splitBy = ",";
+            //создал объект URL
+            final URL url = new URL("http://185.106.92.99:8080/users");
+            System.out.println("Listening for connection on port 8080...");
+            //открыл на основании объекта URL соединение
+            final HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-        //создал объект URL
-        final URL url = new URL("http://185.106.92.99:8080/users");
-        System.out.println("Listening for connection on port 8080...");
+            //создал буфер для данных для дальнейшего чтения данных из него
+            try (final BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+                String inputLine;
+                final StringBuilder content = new StringBuilder();
+                while ((inputLine = in.readLine()) != null) {
+                    content.append(inputLine);
 
-        //открыл на основании объекта URL соединение
-        final HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    try (final PrintWriter writer = new PrintWriter(new File("C:\\Users\\Ivan\\IdeaProjects\\lesson3_maven\\src\\main\\resources\\CSVDemo.csv"))) {
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append(content);
 
-        //создал буфер для данных для дальнейшего чтения данных из него
-
-            try {
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                in = new BufferedReader(new FileReader("CSVDemo.csv"));
-                while ((line = in.readLine()) != null) {
-                    String[] employee = line.split(splitBy);
-                    System.out.println(employee);
+                        writer.write(sb.toString());
+                        writer.close();
+                        System.out.println("Done!");
+                    }
+                    catch (FileNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
-            }
-            catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
