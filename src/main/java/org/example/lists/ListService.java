@@ -25,6 +25,7 @@ public class ListService<E> {
         long before = System.currentTimeMillis();
 
         // implementation
+        list.get(index-1);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -34,6 +35,7 @@ public class ListService<E> {
         long before = System.currentTimeMillis();
 
         // implementation
+        list.get(index-1);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -43,6 +45,7 @@ public class ListService<E> {
         long before = System.currentTimeMillis();
 
         // implementation
+        list.contains(element);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -52,6 +55,7 @@ public class ListService<E> {
         long before = System.currentTimeMillis();
 
         // implementation
+        list.add(element);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -61,6 +65,7 @@ public class ListService<E> {
         long before = System.currentTimeMillis();
 
         // implementation
+        list.add(index, element);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -70,6 +75,7 @@ public class ListService<E> {
         long before = System.currentTimeMillis();
 
         // implementation
+        list.add(index, element);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -79,6 +85,7 @@ public class ListService<E> {
         long before = System.currentTimeMillis();
 
         // implementation
+        list.remove(index-1);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -88,6 +95,7 @@ public class ListService<E> {
         long before = System.currentTimeMillis();
 
         // implementation
+        list.remove(index);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -97,6 +105,7 @@ public class ListService<E> {
         long before = System.currentTimeMillis();
 
         // implementation
+        list.remove(index);
 
         long after = System.currentTimeMillis();
         return after - before;
@@ -106,10 +115,11 @@ public class ListService<E> {
         long before = System.currentTimeMillis();
 
         // implementation
+        if(list.contains(element)) {
+            list.remove(element);
+        }
 
         long after = System.currentTimeMillis();
         return after - before;
     }
-
-
 }
