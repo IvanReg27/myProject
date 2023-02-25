@@ -20,7 +20,7 @@ public class ListServiceTest extends DefaultTest {
         System.out.println("Initializing array and linked list by put 1M records inside");
         List<String> arrayList = new ArrayList<>();
         List<String> linkedList = new LinkedList<>();
-        for (int i = 0; i < 1_000_000; i++) {
+        for (int i = 0; i < 5000; i++) {
             String uuid = UUID.randomUUID().toString();
             arrayList.add(uuid);
             linkedList.add(uuid);
@@ -66,8 +66,8 @@ public class ListServiceTest extends DefaultTest {
         System.out.println("-----------GetElementFromTheBegging 1M times-----------");
 
         for (int i = 0; i < 1_000_000; i++) {
-            totalTimeArray = totalTimeArray + arrayBasedService.getElementFromTheBegging(arrayBasedService.getSize());
-            totalTimeLinked = totalTimeLinked + linkedListBasedService.getElementFromTheBegging(arrayBasedService.getSize());
+            totalTimeArray = totalTimeArray + arrayBasedService.getElementFromTheBegging(1);
+            totalTimeLinked = totalTimeLinked + linkedListBasedService.getElementFromTheBegging(1);
         }
 
         System.out.println("ARRAYLIST: " + totalTimeArray / 1_000_000f);
@@ -75,18 +75,19 @@ public class ListServiceTest extends DefaultTest {
     }
 
     @Test
-    public void compareCheckContainsElement() {
+    public void compareСheckContainsElement() {
         long totalTimeArray = 0;
         long totalTimeLinked = 0;
-        System.out.println("-----------CheckContainsElement 1M times-----------");
+        String uuid ="";
+        System.out.println("-----------СheckContainsElement 1K times-----------");
 
-        for (int i = 0; i < 1_000_000; i++) {
-            totalTimeArray = totalTimeArray + arrayBasedService.checkContainsElement(arrayBasedService.getSize());
-            totalTimeLinked = totalTimeLinked + linkedListBasedService.checkContainsElement(arrayBasedService.getSize());
+        for (int i = 0; i < 1000; i++) {
+            uuid = UUID.randomUUID().toString();
+            totalTimeArray = totalTimeArray + arrayBasedService.checkContainsElement(uuid);
+            totalTimeLinked = totalTimeLinked + linkedListBasedService.checkContainsElement(uuid);
         }
-
-        System.out.println("ARRAYLIST: " + totalTimeArray / 1_000_000f);
-        System.out.println("LINKEDLIST: " + totalTimeLinked / 1_000_000f);
+        System.out.println("ARRAYLIST: " + totalTimeArray / 1000f);
+        System.out.println("LINKEDLIST: " + totalTimeLinked / 1000f);
     }
 
     @Test
@@ -96,8 +97,8 @@ public class ListServiceTest extends DefaultTest {
         System.out.println("-----------AddElementFromBegging 1M times-----------");
 
         for (int i = 0; i < 1_000_000; i++) {
-            totalTimeArray = totalTimeArray + arrayBasedService.addElementFromBegging("yes", 1);
-            totalTimeLinked = totalTimeLinked + linkedListBasedService.addElementFromBegging("yes", 1);
+            totalTimeArray = totalTimeArray + arrayBasedService.addElementFromBegging("yes",1);
+            totalTimeLinked = totalTimeLinked + linkedListBasedService.addElementFromBegging("yes",1);
         }
 
         System.out.println("ARRAYLIST: " + totalTimeArray / 1_000_000f);
@@ -109,11 +110,12 @@ public class ListServiceTest extends DefaultTest {
         long totalTimeArray = 0;
         long totalTimeLinked = 0;
         System.out.println("-----------AddElementToTheMiddle 5K times-----------");
+
         for (int i = 0; i < 5000; i++) {
             totalTimeArray = totalTimeArray + arrayBasedService.addElementToTheMiddle("yes",arrayBasedService.getSize()/2);
             totalTimeLinked = totalTimeLinked + linkedListBasedService.addElementToTheMiddle("yes",arrayBasedService.getSize()/2);
-
         }
+
         System.out.println("ARRAYLIST: " + totalTimeArray / 5000f);
         System.out.println("LINKEDLIST: " + totalTimeLinked / 5000f);
     }
@@ -125,8 +127,8 @@ public class ListServiceTest extends DefaultTest {
         System.out.println("-----------AddElementToTheEnd 1M times-----------");
 
         for (int i = 0; i < 1_000_000; i++) {
-            totalTimeArray = totalTimeArray + arrayBasedService.addElementToTheEnd("yes", arrayBasedService.getSize()-1);
-            totalTimeLinked = totalTimeLinked + linkedListBasedService.addElementToTheEnd("yes", arrayBasedService.getSize()-1);
+            totalTimeArray = totalTimeArray + arrayBasedService.addElementToTheEnd("yes",arrayBasedService.getSize()-1);
+            totalTimeLinked = totalTimeLinked + linkedListBasedService.addElementToTheEnd("yes",arrayBasedService.getSize()-1);
         }
 
         System.out.println("ARRAYLIST: " + totalTimeArray / 1_000_000f);
@@ -137,27 +139,28 @@ public class ListServiceTest extends DefaultTest {
     public void compareDeleteElementFromBegging() {
         long totalTimeArray = 0;
         long totalTimeLinked = 0;
-        System.out.println("-----------DeleteElementFromBegging 1M times-----------");
+        System.out.println("-----------AddElementToTheEnd 5K times-----------");
 
-        for (int i = 0; i < 1_000_000; i++) {
-            totalTimeArray = totalTimeArray + arrayBasedService.deleteElementFromBegging(arrayBasedService.getSize());
-            totalTimeLinked = totalTimeLinked + linkedListBasedService.deleteElementFromBegging(arrayBasedService.getSize());
+        for (int i = 0; i < 5000; i++) {
+            totalTimeArray = totalTimeArray + arrayBasedService.deleteElementFromBegging(1);
+            totalTimeLinked = totalTimeLinked + linkedListBasedService.deleteElementFromBegging(1);
         }
 
-        System.out.println("ARRAYLIST: " + totalTimeArray / 1_000_000f);
-        System.out.println("LINKEDLIST: " + totalTimeLinked / 1_000_000f);
+        System.out.println("ARRAYLIST: " + totalTimeArray / 5000f);
+        System.out.println("LINKEDLIST: " + totalTimeLinked / 5000f);
     }
 
     @Test
     public void compareDeleteElementFromMiddle() {
         long totalTimeArray = 0;
         long totalTimeLinked = 0;
-        System.out.println("-----------DeleteElementFromMiddle 5K times-----------");
-        for (int i = 0; i < 5000; i++) {
-            totalTimeArray = totalTimeArray + arrayBasedService.deleteElementFromMiddle(arrayBasedService.getSize() / 2);
-            totalTimeLinked = totalTimeLinked + linkedListBasedService.deleteElementFromMiddle(arrayBasedService.getSize() / 2);
+        System.out.println("-----------DeleteElementFromMiddle 5К times-----------");
 
+        for (int i = 0; i < 5000; i++) {
+            totalTimeArray = totalTimeArray + arrayBasedService.deleteElementFromMiddle(arrayBasedService.getSize()/2);
+            totalTimeLinked = totalTimeLinked + linkedListBasedService.deleteElementFromMiddle(arrayBasedService.getSize()/2);
         }
+
         System.out.println("ARRAYLIST: " + totalTimeArray / 5000f);
         System.out.println("LINKEDLIST: " + totalTimeLinked / 5000f);
     }
@@ -166,23 +169,23 @@ public class ListServiceTest extends DefaultTest {
     public void compareDeleteElementFromEnd() {
         long totalTimeArray = 0;
         long totalTimeLinked = 0;
-        System.out.println("-----------DeleteElementFromEnd 1M times-----------");
+        System.out.println("-----------DeleteElementFromEnd 5K times-----------");
 
-        for (int i = 0; i < 1_000_000; i++) {
-            totalTimeArray = totalTimeArray + arrayBasedService.deleteElementFromEnd(arrayBasedService.getSize());
-            totalTimeLinked = totalTimeLinked + linkedListBasedService.deleteElementFromEnd(arrayBasedService.getSize());
+        for (int i = 0; i < 5000; i++) {
+            totalTimeArray = totalTimeArray + arrayBasedService.deleteElementFromEnd(arrayBasedService.getSize()-1);
+            totalTimeLinked = totalTimeLinked + linkedListBasedService.deleteElementFromEnd(linkedListBasedService.getSize()-1);
         }
 
-        System.out.println("ARRAYLIST: " + totalTimeArray / 1_000_000f);
-        System.out.println("LINKEDLIST: " + totalTimeLinked / 1_000_000f);
+        System.out.println("ARRAYLIST: " + totalTimeArray / 5000f);
+        System.out.println("LINKEDLIST: " + totalTimeLinked / 5000f);
     }
 
     @Test
     public void compareDeleteElementFromList() {
         long totalTimeArray = 0;
         long totalTimeLinked = 0;
-        String uuid = "";
-        System.out.println("-----------DeleteElementFromList 1M times-----------");
+        String uuid= "";
+        System.out.println("-----------DeleteElementFromList 5K times-----------");
 
         for (int i = 0; i < 5000; i++) {
             uuid = UUID.randomUUID().toString();
