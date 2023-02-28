@@ -15,7 +15,10 @@ public class Errors extends Throwable {
 }
 //StackOverflowError
 class Errors2 extends Throwable {
-        public int calculateFactorial(int number) {
-            return number * calculateFactorial(number - 1);
-        }
+    public static void main(String[] args) throws Error {
+        calculateFactorial(3);
+}
+    private static int calculateFactorial(int number) {
+        return number * calculateFactorial(number - 1);
     }
+}

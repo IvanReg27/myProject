@@ -1,26 +1,30 @@
 package org.example.exceptions;
 
-public class RuntimeExceptions {
+import java.util.ArrayList;
+import java.util.Arrays;
 
-    public void throwsNullPointerException(){
+public class RuntimeExceptions extends Throwable{
+
+    public void throwsNullPointerException() {
         String myString = null;
         myString.length();
     }
 
-    public void throwsArrayIndexOutOfBoundsException(){
-
+    public void throwsArrayIndexOutOfBoundsException() {
+        int[] array = new int[]{1, 2};
+        System.out.println(array[2]);
     }
 
-    public void throwsNumberFormatException(){
-
+    public void throwsNumberFormatException() {
+        Integer.parseInt(null);
     }
 
-    public void throwsIllegalArgumentException(){
-
+    public void throwsIllegalArgumentException() {
+        throw new IllegalArgumentException("Illegal argument!");
     }
 
-    public static void throwsClassCastException(){
-
+    public static void throwsClassCastException() {
+        String[] strArray = new String[] {"Dima", "Ivan"};
+        ArrayList<String> strList = (ArrayList<String>) Arrays.asList(strArray);
     }
-
 }
