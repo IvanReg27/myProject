@@ -1,10 +1,21 @@
 package org.example.exceptions;
 
-public class Errors {
+import java.util.LinkedList;
+import java.util.List;
 
-    public void throwsOOOException(){
-    }
+//OutOfMemoryError
+public class Errors extends Throwable {
+    public static void main(String[] args) throws Error {
 
-    public void throwsStackOverFlowError(){
+        final List<Object[]> arrays = new LinkedList<>();
+        for (; ; ) {
+            arrays.add(new Object[100]);
+        }
     }
 }
+//StackOverflowError
+class Errors2 extends Throwable {
+        public int calculateFactorial(int number) {
+            return number * calculateFactorial(number - 1);
+        }
+    }
