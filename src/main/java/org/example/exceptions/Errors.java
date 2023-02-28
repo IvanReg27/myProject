@@ -4,14 +4,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Errors extends Throwable {
-    public void outOfMemoryError() throws Errors {
+    public void throwsOutOfMemoryError() throws Errors {
 
         final List<Object[]> arrays = new LinkedList<>();
         for (; ; ) {
             arrays.add(new Object[100]);
         }
     }
-        public void StackOverflowError() throws Errors {
+    public void throwsStackOverflowError() throws Errors {
             calculateFactorial(3);
         }
         private int calculateFactorial(int number) {
