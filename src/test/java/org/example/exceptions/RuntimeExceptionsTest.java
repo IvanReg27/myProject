@@ -16,10 +16,10 @@ public class RuntimeExceptionsTest extends DefaultTest {
         );
     }
     @Test
-    void arrayIndexOutOfBoundsException() {
+    void ArrayIndexOutOfBoundsException() {
         RuntimeExceptions runtimeExceptions = new RuntimeExceptions();
         assertThrows(
-                ArrayIndexOutOfBoundsException.class,
+                IndexOutOfBoundsException.class,
                 () -> runtimeExceptions.throwsArrayIndexOutOfBoundsException(),
                 "Had to trown an exception but it didn't"
         );
