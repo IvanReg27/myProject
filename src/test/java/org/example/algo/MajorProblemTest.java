@@ -15,4 +15,4 @@ public class MajorProblemTest extends DefaultTest {
         Assertions.assertEquals(2, b);
     }
 }
-//дописать тесты
+//дописать тесты - слишком сложная логика для определения числа...
