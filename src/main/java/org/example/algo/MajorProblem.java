@@ -3,10 +3,12 @@ package org.example.algo;
 import java.util.HashMap;
 
 public class MajorProblem {
-    public static void main(String[] args) {
+    // O(N) algorithm complexity
+    public static int findMajorityElement(int[] input) {
 
-        int[] array = new int[]{2, 8, 7, 2, 2, 5, 2, 3, 1, 2, 2};
+        int[] array = {2, 8, 7, 2, 2, 5, 2, 3, 1, 2, 2};
         //int[] array = new int[]{1, 3, 1, 1};
+
         HashMap<Integer, Integer> map = new HashMap<>();
 
         Integer value = null;
@@ -24,7 +26,7 @@ public class MajorProblem {
                 maxKey = key;
             }
         }
-        System.out.println("число которое встречается чаще всех в заданном массиве " + maxKey);
+        return maxKey;
     }
 }
 
