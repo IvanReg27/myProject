@@ -1,5 +1,6 @@
-package org.example;
+package org.example.sort;
 
+import org.example.DefaultTest;
 import org.junit.jupiter.api.Test;
 import sort.BubbleSort;
 

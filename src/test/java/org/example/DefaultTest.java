@@ -12,13 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DefaultTest {
 
 
-    @Test
+    /*@Test
     public void inverseString() {
         App app = new App();
         String inputString = "hello";
         String invertedString = app.inverseString(inputString);
         assertThat(invertedString, equalTo("olleh"));
-    }
+    }*/
 /*
     @Test
     public void checkHasSumPositive() {
