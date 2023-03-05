@@ -25,6 +25,9 @@ public class StringValidationUtils {
     private static final Pattern VALID_PHONE_KZ =
             Pattern.compile("/(\\+)([997]){3}-([0-9]){3}-([0-9]){3}-([0-9]){2}-([0-9]){2}/g", Pattern.CASE_INSENSITIVE);
 
+    private static final Pattern VALID_PHONE_PLUS_AND_BRACKETS =
+            Pattern.compile("/([\\\\d+*()])/g", Pattern.CASE_INSENSITIVE);
+
     public static boolean isValidEmail(String email) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
         return matcher.find();
@@ -61,6 +64,11 @@ public class StringValidationUtils {
 
     public static boolean hasOnlyPhoneKZ(String someString) {
         Matcher matcher = VALID_PHONE_KZ.matcher(someString);
+        return matcher.find();
+    }
+
+    public static boolean hasOnlyPlusAndBrackets(String someString) {
+        Matcher matcher = VALID_PHONE_PLUS_AND_BRACKETS.matcher(someString);
         return matcher.find();
     }
 }

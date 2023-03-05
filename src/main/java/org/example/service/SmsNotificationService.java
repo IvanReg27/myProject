@@ -62,19 +62,23 @@ public class SmsNotificationService implements NotificationService{
             //Homework lesson_4 (regex phone)
 
             if (!hasOnlyPhoneRUS(number)) {
-                throw new RuntimeException("phone: " + number + " has invalid format country!");
+                throw new RuntimeException("phone: " + number + " has invalid format country RUS!");
             }
 
             if (!hasOnlyPhoneBY(number)) {
-                throw new RuntimeException("phone: " + number + " has invalid format country!");
+                throw new RuntimeException("phone: " + number + " has invalid format country BY!");
             }
 
             if (!hasOnlyPhoneUA(number)) {
-                throw new RuntimeException("phone: " + number + " has invalid format country!");
+                throw new RuntimeException("phone: " + number + " has invalid format country UA!");
             }
 
             if (!hasOnlyPhoneKZ(number)) {
-                throw new RuntimeException("phone: " + number + " has invalid format country!");
+                throw new RuntimeException("phone: " + number + " has invalid format country KZ!");
+            }
+
+            if (!hasOnlyPlusAndBrackets(number)) {
+                throw new RuntimeException("phone: " + number + " has in phone number chars plus and brackets!");
             }
             this.number = number;
             this.text = text;
