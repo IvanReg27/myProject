@@ -43,4 +43,24 @@ public class StringValidationUtils {
         Matcher matcher = VALID_A_Z.matcher(someString);
         return matcher.find();
     }
+
+    public static boolean hasOnlyPhoneRUS(String someString) {
+        Matcher matcher = VALID_PHONE_RUS.matcher(someString);
+        return matcher.find();
+    }
+
+    public static boolean hasOnlyPhoneBY(String someString) {
+        Matcher matcher = VALID_PHONE_BY.matcher(someString);
+        return matcher.find();
+    }
+
+    public static boolean hasOnlyPhoneUA(String someString) {
+        Matcher matcher = VALID_PHONE_UA.matcher(someString);
+        return matcher.find();
+    }
+
+    public static boolean hasOnlyPhoneKZ(String someString) {
+        Matcher matcher = VALID_PHONE_KZ.matcher(someString);
+        return matcher.find();
+    }
 }
