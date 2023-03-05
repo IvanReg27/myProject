@@ -11,6 +11,20 @@ public class StringValidationUtils {
     private static final Pattern VALID_A_Z =
             Pattern.compile("^[a-zA-Z]*$", Pattern.CASE_INSENSITIVE);
 
+    //Homework lesson_4 (regex phone)
+
+    private static final Pattern VALID_PHONE_RUS =
+            Pattern.compile("/(\\+)([7]){1}-([0-9]){3}-([0-9]){3}-([0-9]){2}-([0-9]){2}/g", Pattern.CASE_INSENSITIVE);
+
+    private static final Pattern VALID_PHONE_BY =
+            Pattern.compile("/(\\+)([375]){3}-([0-9]){3}-([0-9]){3}-([0-9]){2}-([0-9]){2}/g", Pattern.CASE_INSENSITIVE);
+
+    private static final Pattern VALID_PHONE_UA =
+            Pattern.compile("/(\\+)([380]){3}-([0-9]){2}-([0-9]){3}-([0-9]){4}/g", Pattern.CASE_INSENSITIVE);
+
+    private static final Pattern VALID_PHONE_KZ =
+            Pattern.compile("/(\\+)([997]){3}-([0-9]){3}-([0-9]){3}-([0-9]){2}-([0-9]){2}/g", Pattern.CASE_INSENSITIVE);
+
     public static boolean isValidEmail(String email) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
         return matcher.find();
