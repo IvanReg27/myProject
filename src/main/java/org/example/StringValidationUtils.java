@@ -28,6 +28,9 @@ public class StringValidationUtils {
     private static final Pattern VALID_PHONE_PLUS_AND_BRACKETS =
             Pattern.compile("/([\\\\d+*()])/g", Pattern.CASE_INSENSITIVE);
 
+    private static final Pattern VALID_EMAIL_ADDRESS_GMAIL_REGEX =
+            Pattern.compile("/[_A-Za-z0-9-\\\\+]+@gmail.com/g", Pattern.CASE_INSENSITIVE);
+
     public static boolean isValidEmail(String email) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
         return matcher.find();
@@ -69,6 +72,11 @@ public class StringValidationUtils {
 
     public static boolean hasOnlyPlusAndBrackets(String someString) {
         Matcher matcher = VALID_PHONE_PLUS_AND_BRACKETS.matcher(someString);
+        return matcher.find();
+    }
+
+    public static boolean hasOnlyEmailAddressGmail(String someString) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_GMAIL_REGEX.matcher(someString);
         return matcher.find();
     }
 }

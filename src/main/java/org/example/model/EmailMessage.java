@@ -1,7 +1,6 @@
 package org.example.model;
 
-import static org.example.StringValidationUtils.hasLengthMoreThan;
-import static org.example.StringValidationUtils.isValidEmail;
+import static org.example.StringValidationUtils.*;
 
 public class EmailMessage {
     private final String email;
@@ -21,6 +20,9 @@ public class EmailMessage {
         }
         if (!hasLengthMoreThan(textMessage, 3)) {
             throw new RuntimeException("message text: " + textMessage + " is invalid!");
+        }
+        if (!hasOnlyEmailAddressGmail(email)) {
+            throw new RuntimeException("phone: " + email + " has invalid format email(Only: gmail.com)!");
         }
         this.email = email;
         this.textMessage = textMessage;
