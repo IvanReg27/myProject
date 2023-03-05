@@ -11,6 +11,7 @@ import java.nio.charset.Charset;
 import static org.example.StringValidationUtils.*;
 
 public class SmsNotificationService implements NotificationService{
+
     private final static String SMS_URL_PROVIDER = "https://gate.smsaero.ru/v2/sms/send";
     private final static int SMS_TEXT_MESSAGE_MIN_LENGTH = 3;
 

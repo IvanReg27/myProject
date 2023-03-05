@@ -4,6 +4,7 @@ import org.example.service.EmailNotificationService;
 import org.example.service.NotificationService;
 import org.example.service.SmsNotificationService;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,11 @@ public class Controller {
         String password = "MjHqfCWBKh63W12Ognw5aM4XzR"; //check in group
 
         NotificationService smsService = new SmsNotificationService(name, password);
+
+        //Пока не получается смс текст направить в Json формате (согласно ссылки...которую ты дал)
+        /*ObjectMapper objectMapper = new ObjectMapper();
+        SmsNotificationService smsConvertToJson = new SmsNotificationService(name, password);
+        objectMapper.writeValue(new File("target/smsConvertToJson.json"), smsConvertToJson);*/
 
         lookup.put(DELIVERY_CHANNEL.SMS, emailService);
         lookup.put(DELIVERY_CHANNEL.EMAIL, smsService);
