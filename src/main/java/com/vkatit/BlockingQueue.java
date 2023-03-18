@@ -12,6 +12,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class BlockingQueue {
 
     private final Queue<String> queue = new LinkedList<>();
+
+
     private final Integer MAX_CAPACITY;
     private final Object lock = new Object();
 
@@ -20,16 +22,15 @@ public class BlockingQueue {
     }
 
     public String poll() {
-        synchronized (lock){
-            while (true){
-                if(!queue.isEmpty()){
-                    System.out.println("has something to pool: " + queue.size() +  " from reader: " + Thread.currentThread().getName());
+        synchronized (lock) {
+            while (true) {
+                if (!queue.isEmpty()) {
+                    System.out.println("has something to pool: " + queue.size() + " from reader: " + Thread.currentThread().getName());
                     lock.notifyAll();
                     return queue.poll();
-                }
-                else {
+                } else {
                     try {
-                        System.out.println("has nothing to pool: " + queue.size() +  " from reader: " + Thread.currentThread().getName());
+                        System.out.println("has nothing to pool: " + queue.size() + " from reader: " + Thread.currentThread().getName());
                         lock.wait();
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
@@ -40,16 +41,16 @@ public class BlockingQueue {
     }
 
     public void push(String newRecord) {
-        synchronized (lock){
-            while(true){
-                if(queue.size() < MAX_CAPACITY){
-                    System.out.println("has capacity: " + queue.size() +  " from pusher: " + Thread.currentThread().getName());
+        synchronized (lock) {
+            while (true) {
+                if (queue.size() < MAX_CAPACITY) {
+                    System.out.println("has capacity: " + queue.size() + " from pusher: " + Thread.currentThread().getName());
                     queue.add(newRecord);
                     lock.notifyAll();
                     break;
-                }else{
+                } else {
                     try {
-                        System.out.println("has no capacity: " + queue.size() +  " from pusher : " + Thread.currentThread().getName() + " sleeping");
+                        System.out.println("has no capacity: " + queue.size() + " from pusher : " + Thread.currentThread().getName() + " sleeping");
                         lock.wait();
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
@@ -63,30 +64,32 @@ public class BlockingQueue {
     ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
 
-    final Condition notFull  = reentrantLock.newCondition();
+    final Condition notFull = reentrantLock.newCondition();
     final Condition notEmpty = reentrantLock.newCondition();
 
-    public void read(){
-        try{
+    public void read() {
+        try {
             readWriteLock.readLock();
+
             queue.peek();
 
-        }finally {
+        } finally {
             readWriteLock.readLock();
         }
     }
 
-    public void write(String data){
-        try{
+    public void write(String data) {
+        try {
             readWriteLock.writeLock();
+
+
             queue.add(data);
-        }finally {
+
+
+        } finally {
             readWriteLock.writeLock();
         }
     }
-
-
-
 
 
 }
