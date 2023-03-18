@@ -1,68 +1,105 @@
 package com.vkatit;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-
-import java.io.File;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
 
 // visibility, atomicity, orderding, happens before
 
-    public static int value = 0;
 
     private static final Queue<Runnable> workers = new LinkedList<>();
     private static Thread mainThread = null;
     List<Integer> simleNumbers = new ArrayList<>();
+
+    private static AtomicInteger myAtomic = new AtomicInteger(0);
+    private static List<String> myList = new CopyOnWriteArrayList<>();
+    private static Map<String, String> map = new ConcurrentHashMap<>();
+
+    static final Object lock = new Object();
+
+    static List<Thread> allThreads = new CopyOnWriteArrayList<>();
+
+
+    static long value = 0;
+
     public static void main(String[] args) throws InterruptedException {
 
-        System.out.println("init");
-        mainThread = Thread.currentThread();
+        BlockingQueue blockingQueue = new BlockingQueue(100);
 
-        Thread vasyaThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    System.out.println("keke");
+        for (int i = 0; i < 100; i++) {
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    blockingQueue.push(UUID.randomUUID().toString());
                 }
-            }
-        }, "vasya thread");
+            }, "pusher" + i);
+            thread.start();
 
-        vasyaThread.setDaemon(true);
-        vasyaThread.start();
-////        ExecutorService service = Executors.newFixedThreadPool(3);
-//        ExecutorService service = Executors.newCachedThreadPool();
-//
-//        service.submit(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//
-//
-//            }
-//        });
-//
-//        service.shutdown();
+            Thread thread1 = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    blockingQueue.poll();
+                }
+            }, "pooler" + i);
+            thread1.start();
+        }
 
 
-//        Integer[] myIntegerArray = new Integer[Integer.MAX_VALUE];
-//        Integer myVal  = 123;
-//        printMe(myVal);
-//        myVal = 555;
-//        int myPrimitiveValue = 123;
-//        File file = new File("keke");
+
+
+//        for (int i = 0; i < 100; i++) {
+//            Thread thread = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    while (value < 10_000) {
+//                        write();
+//                    }
+//                }
+//            }, "writer" + i);
+//            allThreads.add(thread);
+//            thread.start();
+//        }
+
+//        for (int i = 0; i < 200; i++) {
+//            Thread thread = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    read();
+//                }
+//            },"reader" + i);
+//            allThreads.add(thread);
+//            thread.start();
+//        }
+
     }
 
-    private static void printMe(Integer someValue) {
-        Integer myVal = 333;
-        String someString = "kekee";
-        System.out.println(someValue);
+    private static void write() {
+        synchronized (lock) {
+            value = value + 1;
+            System.out.println("increased value to: " + value + " by thread: " + Thread.currentThread().getName());
+        }
+    }
+
+//    static ReentrantLock reentrantLock = new ReentrantLock(true);
+
+//    private static void writeFair() {
+//        try {
+//            reentrantLock.lock();
+//            value = value + 1;
+//            System.out.println("increased value to: " + value + " by thread: " + Thread.currentThread().getName());
+//        } finally {
+//            reentrantLock.unlock();
+//        }
+//    }
+
+    private static void read() {
+        synchronized (lock) {
+            System.out.println(value);
+        }
     }
 
 }
