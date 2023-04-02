@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,33 +23,33 @@ public class CitizenService {
 
     public List<Citizen> citizensLivingInThatCountry(String country) {
         return citizenList.stream()
-                .filter(citizens -> citizens.getCountry() == "Russia")
+                .filter(citizens -> citizens.getCountry().equals(country))
                 .collect(Collectors.toList());
     }
 
     public List<Citizen> tenCitizensMaxId(Long id) {
         return citizenList.stream()
-                .filter(citizens -> citizens.getId() > 990)
+                .sorted(Comparator.comparing(Citizen::getId))
+                .limit(10)
                 .collect(Collectors.toList());
     }
 
     //пока не получилось реализовать через заданный диапазон (от ... до ...)
-    public List<Citizen> allCitizensRangeDate(String birthDate) {
-        return citizenList.stream()
-                .filter(citizens -> citizens.getBirthDate().equals("1990"))
-                .filter(citizens -> citizens.getBirthDate().equals("1991"))
-                .filter(citizens -> citizens.getBirthDate().equals("1992"))
-                .filter(citizens -> citizens.getBirthDate().equals("1993"))
-                .filter(citizens -> citizens.getBirthDate().equals("1994"))
-                .filter(citizens -> citizens.getBirthDate().equals("1995"))
-                .filter(citizens -> citizens.getBirthDate().equals("1996"))
-                .filter(citizens -> citizens.getBirthDate().equals("1997"))
-                .filter(citizens -> citizens.getBirthDate().equals("1998"))
-                .filter(citizens -> citizens.getBirthDate().equals("1999"))
-                .collect(Collectors.toList());
+//    public List<Citizen> allCitizensRangeDate(LocalDateTime birthDate) {
+//        return citizenList.stream()
+//                .filter(citizens -> citizens.getBirthDate().equals("1990"))
+//                .filter(citizens -> citizens.getBirthDate().equals("1991"))
+//                .filter(citizens -> citizens.getBirthDate().equals("1992"))
+//                .filter(citizens -> citizens.getBirthDate().equals("1993"))
+//                .filter(citizens -> citizens.getBirthDate().equals("1994"))
+//                .filter(citizens -> citizens.getBirthDate().equals("1995"))
+//                .filter(citizens -> citizens.getBirthDate().equals("1996"))
+//                .filter(citizens -> citizens.getBirthDate().equals("1997"))
+//                .filter(citizens -> citizens.getBirthDate().equals("1998"))
+//                .filter(citizens -> citizens.getBirthDate().equals("1999"))
+//                .collect(Collectors.toList());
     }
 
-    //не уверен, что правильно
     public List<Citizen> allCountryDoNotRepeat(String country) {
         return citizenList.stream()
                 .distinct()
@@ -55,20 +58,31 @@ public class CitizenService {
 
     public List<Citizen> firstCitizensFourChars(String firstName) {
         return citizenList.stream()
-                .filter(citizens -> citizens.getFirstName().length() == 9)
-                .collect(Collectors.toList());
+                .filter(s -> s.getFirstName().length() == length)
+                .findFirst().orElseThrow(CitizenNotFound::new);
     }
 
-    //не получилось реализовать т.к. ДР тип String
-//    public List<Citizen> averageDateAllCitizens(String birthDate) {
+    //не получилось реализовать т.к. ДР тип String (конвертировать надо...но есть символы "-" и ".")
+//    public List<Citizen> averageDateAllCitizens(LocalDateTime birthDate) {
 //        return citizenList.stream()
 //                .filter(citizens -> citizens.getBirthDate())
 //                .mapToInt(Citizen::getBirthDate)
 //                .average().getAsDouble();
 //    }
-    public List<Citizen> mapThatIdForCitizen(Long id) {
+    public Map<Long, Citizen> mapIdCitizenForAllValue() {
         return citizenList.stream()
-                .filter(citizens -> citizens.getId() > 990)
-                .collect(Collectors.toList());
+                .collect(Collectors.toMap(Citizen::getId, Function.identity()));
     }
+    public Map<String, List<Citizen>> mapCountryForCitizens() {
+        return citizenList.stream()
+                .collect(Collectors.groupingBy(Citizen::getCountry));
+    }
+
+    //гуглить, доделать
+
+//    public List<Citizen> allCountryDoNotRepeat(String address) {
+//        return citizenList.stream()
+//                .flatMap(l -> l.stream())
+//                    .collect(Collectors.toList());
+//    }
 }
