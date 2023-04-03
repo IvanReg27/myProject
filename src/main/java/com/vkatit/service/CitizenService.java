@@ -37,6 +37,7 @@ public class CitizenService {
     }
 
     //пока не получилось реализовать через заданный диапазон (от ... до ...)
+
 //    public List<Citizen> allCitizensRangeDate(LocalDateTime birthDate) {
 //        return citizenList.stream()
 //                .filter(citizens -> citizens.getBirthDate().equals("1990"))
@@ -58,7 +59,7 @@ public class CitizenService {
                 .collect(Collectors.toList());
     }
 
-    public List<Citizen> firstCitizensFourChars(String firstName) {
+    public Citizen firstCitizensFourChars(Integer length) {
         return citizenList.stream()
                 .filter(s -> s.getFirstName().length() == length)
                 .findFirst().orElseThrow(CitizenNotFound::new);
@@ -82,9 +83,9 @@ public class CitizenService {
     }
 
     //не уверен, что правильно
-    public List<String> splitStringIntoWords() {
-        return words.stream()
-            .flatMap(pair -> Stream.of(pair.split(" , ")))
-            .collect(Collectors.toList());
-    }
+//    public List<String> splitStringIntoWords() {
+//        return words.stream()
+//            .flatMap(pair -> Stream.of(pair.split("\\s")))
+//            .collect(Collectors.toList());
+//    }
 }
