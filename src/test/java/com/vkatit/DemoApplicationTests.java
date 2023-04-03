@@ -23,16 +23,16 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @TestInstance(PER_CLASS)
-
 public class DemoApplicationTests {
-
     @LocalServerPort
     private int randomPort;
     private RestTemplate restTemplate;
+
     @BeforeEach
     public void init() {
         restTemplate = new RestTemplate();
     }
+
     @Test
     @DisplayName("Citizens living in a given country")
     public void countryAndCitizens() {
@@ -46,15 +46,14 @@ public class DemoApplicationTests {
                 .build();
         Citizen[] citizens = restTemplate.getForObject("http://localhost:" + randomPort + "/api/citizen/country/" + nameCountry, Citizen[].class);
 
-
         assertNotNull(citizens);
         assertEquals(citizens[0], fromGuatemala);
         assertEquals(citizens.length, 1);
     }
 
     @Test
-    @DisplayName("All countries where citizen live (no repetitions(Distinct))")
-    public void countriesDistinct() {
+    @DisplayName("All countries where citizens live (no repetitions(DISTINCT)")
+    public void countriesDISTINCT() {
         String[] actualCountries = {"Belize", "The Gambia", "Guinea", "Venezuela", "China", "Norway", "Lithuania",
                 "Ireland", "Thailand", "Poland", "Libya", "Burkina Faso", "Chile", "Slovakia", "Nicaragua",
                 "Serbia", "Slovenia", "Kosovo", "Suriname", "Cameroon", "Dominican Republic", "Cabo Verde",
@@ -67,11 +66,12 @@ public class DemoApplicationTests {
                 "Netherlands", "Myanmar", "Madagascar", "Andorra", "Uzbekistan", "Azerbaijan", "Tonga", "Mexico",
                 "Belgium", "Singapore", "Kiribati", "Chad", "Mozambique", "India", "USA", "Morocco", "Guatemala", "Bangladesh"};
         String[] countries = restTemplate.getForObject("http://localhost:" + randomPort + "/api/citizen/allCountriesDIST", String[].class);
+
         assertArrayEquals(countries, actualCountries);
     }
 
     @Test
-    @DisplayName("Map that contains the id and value for citizen")
+    @DisplayName("Map that contains the key of the citizen's ID and the value of the citizen")
     public void map() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());

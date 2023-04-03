@@ -52,11 +52,13 @@ public class CitizenService {
 //                .collect(Collectors.toList());
 //    }
 
-    public List<Citizen> allCountryDoNotRepeat(String country) {
+    public List<String> allCountryDoNotRepeat() {
         return citizenList.stream()
+                .map(Citizen::getCountry)
                 .distinct()
                 .collect(Collectors.toList());
     }
+
 
     public Citizen firstCitizensFourChars(Integer length) {
         return citizenList.stream()
