@@ -1,5 +1,6 @@
 package com.vkatit.service;
 
+import com.vkatit.exception.CitizenNotFound;
 import com.vkatit.model.Citizen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class CitizenService {
@@ -48,7 +50,7 @@ public class CitizenService {
 //                .filter(citizens -> citizens.getBirthDate().equals("1998"))
 //                .filter(citizens -> citizens.getBirthDate().equals("1999"))
 //                .collect(Collectors.toList());
-    }
+//    }
 
     public List<Citizen> allCountryDoNotRepeat(String country) {
         return citizenList.stream()
@@ -63,6 +65,7 @@ public class CitizenService {
     }
 
     //не получилось реализовать т.к. ДР тип String (конвертировать надо...но есть символы "-" и ".")
+
 //    public List<Citizen> averageDateAllCitizens(LocalDateTime birthDate) {
 //        return citizenList.stream()
 //                .filter(citizens -> citizens.getBirthDate())
@@ -78,11 +81,10 @@ public class CitizenService {
                 .collect(Collectors.groupingBy(Citizen::getCountry));
     }
 
-    //гуглить, доделать
-
-//    public List<Citizen> allCountryDoNotRepeat(String address) {
-//        return citizenList.stream()
-//                .flatMap(l -> l.stream())
-//                    .collect(Collectors.toList());
-//    }
+    //не уверен, что правильно
+    public List<String> splitStringIntoWords() {
+        return words.stream()
+            .flatMap(pair -> Stream.of(pair.split(" , ")))
+            .collect(Collectors.toList());
+    }
 }
