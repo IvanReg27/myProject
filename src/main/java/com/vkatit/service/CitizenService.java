@@ -82,7 +82,7 @@ public class CitizenService {
                 .collect(Collectors.groupingBy(Citizen::getCountry));
     }
 
-    //не уверен, что правильно
+    //не уверен, что правильно (split?)
 //    public List<String> splitStringIntoWords() {
 //        return words.stream()
 //            .flatMap(pair -> Stream.of(pair.split("\\s")))
