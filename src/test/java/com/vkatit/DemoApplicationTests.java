@@ -84,8 +84,7 @@ public class DemoApplicationTests {
                 .birthDate(LocalDateTime.of(1971, 6, 16, 16, 52))
                 .build();
 
-        String easyString = restTemplate.getForObject(
-                "http://localhost:" + randomPort + "/api/citizen/map", String.class);
+        String easyString = restTemplate.getForObject("http://localhost:" + randomPort + "/api/citizen/map", String.class);
         Map<Long, Citizen> userData = mapper.readValue(
                 easyString, new TypeReference<>() {});
 

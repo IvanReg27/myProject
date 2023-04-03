@@ -1,6 +1,5 @@
 package com.vkatit;
 
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vkatit.model.Citizen;
