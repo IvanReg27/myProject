@@ -1,10 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Favorite photo</title>
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous"
+  />
+  <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          crossorigin="anonymous"
+  ></script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <style>
+    .card {
+      text-align: center;
+      padding: 1em;
+    }
+    .card:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    .card img {
+      width: 100%;
+      margin: auto;
+    }
+  </style>
 </head>
 <body>
-$END$
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand p-0" href="/">
+      <img src="MHR.png" alt="Logo" width="60" />
+    </a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="places.html">Favorite photo</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container my-5">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+    <div class="col">
+      <div class="card">
+        <img src="img1.jpeg" class="card-img-top" alt="My image" />
+        <div class="card-body">
+          <h5 class="card-title">Kazbegi</h5>
+          <p class="card-text">
+            Stepantsminda, is a townlet in the Mtskheta-Mtianeti region of
+            north-eastern Georgia.
+          </p>
+          <a href="img1.jpeg" target="_blank" class="btn btn-primary"
+          >Large photo</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="img2.jpeg" class="card-img-top" alt="My image" />
+        <div class="card-body">
+          <h5 class="card-title">Tbilisi</h5>
+          <p class="card-text">
+            Tbilisi is the capital of the country of Georgia. Its
+            cobblestoned old town reflects a long, complicated history, with
+            periods under Persian and Russian rule.
+          </p>
+          <a href="img2.jpeg" target="_blank" class="btn btn-primary"
+          >Large photo</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="img3.jpeg" class="card-img-top" alt="My image" />
+        <div class="card-body">
+          <h5 class="card-title">Old Tbilisi</h5>
+          <p class="card-text">
+            Dzveli Tbilisi, or Old Tbilisi, is a large area known for its
+            snaking lanes, traditional Tbilisi houses, and restaurant-lined
+            Jan Shardeni Street.
+          </p>
+          <a href="img3.jpeg" target="_blank" class="btn btn-primary"
+          >Large photo</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="img4.jpeg" class="card-img-top" alt="My image" />
+        <div class="card-body">
+          <h5 class="card-title">Beach</h5>
+          <p class="card-text">
+            Wild beach where our friends from Belarus and Spain live.
+          </p>
+          <a href="img4.jpeg" target="_blank" class="btn btn-primary"
+          >Large photo</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="img5.jpeg" class="card-img-top" alt="My image" />
+        <div class="card-body">
+          <h5 class="card-title">Tsikhisdziri</h5>
+          <p class="card-text">
+            Tsikhisdziri is a village in the Kobuleti Municipality,
+            Autonomous Republic of Adjara, Georgia, on the Black Sea coast,
+            8 km south of the town of Kobuleti.
+          </p>
+          <a href="img5.jpeg" target="_blank" class="btn btn-primary"
+          >Large photo</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="img6.jpeg" class="card-img-top" alt="My image" />
+        <div class="card-body">
+          <h5 class="card-title">Gudauri</h5>
+          <p class="card-text">
+            Gudauri is a ski resort located on the south-facing plateau of
+            The Greater Caucasus Mountain Range in Georgia.
+          </p>
+          <a href="img6.jpeg" target="_blank" class="btn btn-primary"
+          >Large photo</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
