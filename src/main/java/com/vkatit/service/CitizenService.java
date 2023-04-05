@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class CitizenService {
@@ -84,8 +85,9 @@ public class CitizenService {
     }
 
     //не уверен, что правильно (split?)
+
 //    public List<String> splitStringIntoWords() {
-//        return words.stream()
+//        return citizenList.stream()
 //            .flatMap(pair -> Stream.of(pair.split("\\s")))
 //            .collect(Collectors.toList());
 //    }
