@@ -41,5 +41,4 @@ class DemoApplicationTests {
         MatcherAssert.assertThat(countries, is(notNullValue()));
         MatcherAssert.assertThat(countries.length, is(equalTo(6)));
     }
-
 }
