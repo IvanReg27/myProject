@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Employee {
 
     private String firstName;
