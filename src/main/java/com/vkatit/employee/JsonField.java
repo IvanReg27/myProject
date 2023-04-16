@@ -8,6 +8,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface JsonField {
 
-    String defaultValue();
     String fieldName();
 }
