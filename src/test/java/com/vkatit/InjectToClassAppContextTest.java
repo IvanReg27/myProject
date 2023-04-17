@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
 public class InjectToClassAppContextTest {
 
     @Test
-    void InjectToClass() throws IllegalAccessException {
+    void InjectToClass() {
         InjectToClassAppContext injectToClassAppContext = new InjectToClassAppContext();
         ApplicationContext context = new ApplicationContext();
 
