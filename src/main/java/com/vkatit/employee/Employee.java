@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 public class Employee {
 
-    @JsonField(fieldName = "Dmitry")
     private String firstName;
     private String lastName;
     private int age;

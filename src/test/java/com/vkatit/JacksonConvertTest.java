@@ -13,6 +13,7 @@ public class JacksonConvertTest {
 
     @Test
     void employeeToJson() throws JsonProcessingException {
+
         Employee employee = new Employee("Makhorin", "Ivan", 35);
         String json = objectMapper.writeValueAsString(employee);
         System.out.println(json);
