@@ -10,12 +10,12 @@ public class ApplicationContext {
     public ApplicationContext() {
 
         List<String> list = new ArrayList<>();
-        list.add("String in list ONE");
-        list.add("String in list TWO");
+        list.add("I like Java");
+        list.add("I really like Java");
 
         applicationContext.put(List.class, list);
-        applicationContext.put(Integer.class, 17);
-        applicationContext.put(String.class, "MyNameIvan");
+        applicationContext.put(Integer.class, 35);
+        applicationContext.put(String.class, "My name is Ivan");
     }
     public <T> T getInjectToClassAppContext(Class<T> clazz) {
         return clazz.cast(applicationContext.get(clazz));

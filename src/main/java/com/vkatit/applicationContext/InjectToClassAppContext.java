@@ -13,7 +13,7 @@ public class InjectToClassAppContext {
     public InjectToClassAppContext() {
         integer = 1988;
         list = List.of("1988", "2018", "2022");
-        string = "default value";
+        string = "string default value";
     }
 
     public List<String> getList() {
