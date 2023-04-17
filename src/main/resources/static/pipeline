@@ -1,0 +1,26 @@
+#!groovy
+pipeline {
+    agent any
+    stages {
+         stage('First part'){
+           steps {
+               dir('vanya_lesson13') {
+                   sh 'git clone https://github.com/IvanReg27/vanya_lesson || true'
+                   }
+            sh 'docker stop mariadb || true'
+            sh 'docker rm mariadb || true'
+            sh 'docker run --detach --name mariadb --env MARIADB_USER=root --env MARIA_DB_PASSWORD=12oCFWg8SU_2 --env MARIADB_ROOT_PASSWORD=12oCFWg8SU_2 -p 3309:3306 -v /var/lib/jenkins/workspace/vanya_lesson/src/main/resources/init-db.sql:/docker-entrypoint-initdb.d/schema.sql mariadb:latest'
+            }
+        }
+        stage('Second part'){
+            steps {
+                sh 'docker stop myTestContainer || true'
+                sh 'docker rm myTestContainer || true'
+                sh 'docker run -t -d --name myTestContainer -p 7777:8080 appimage'
+                sh 'docker exec myTestContainer git clone https://github.com/IvanReg27/vanya_lesson'
+                sh 'docker exec myTestContainer mvn -f vanya_lesson clean install test'
+                sh 'docker exec myTestContainer nohup java -DUSERNAME_DB="root" -DPASSWORD_DB="12oCFWg8SU_2" -DIP="185.106.92.148" -DPORT="3309" -jar /vanya_lesson/target/demo-1.0.jar &'
+            }
+        }
+    }
+}
