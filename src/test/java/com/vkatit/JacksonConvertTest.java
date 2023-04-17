@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vkatit.employee.Employee;
 import com.vkatit.employee.JsonField;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Null;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import java.lang.reflect.Field;
 
 public class JacksonConvertTest {
