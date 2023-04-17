@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 
 public class Employee {
 
+    @JsonField(defaultValue="Ivan")
     private String firstName;
     private String lastName;
     private int age;
-
     @JsonGetter("employeeFirstName")
     public String getFirstName() {
         return firstName;

@@ -5,10 +5,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD,ElementType.METHOD})
+@Retention(RetentionPolicy.SOURCE)
+@Target(ElementType.FIELD)
 
-//аннотация @JsonField(defaultValue)
-public @interface JsonField {
-    String defaultValue();
+//вместо @JsonField(fieldName)
+public @interface JsonGetter {
 }
