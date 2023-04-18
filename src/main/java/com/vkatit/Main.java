@@ -4,12 +4,10 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
 
 // visibility, atomicity, orderding, happens before
-
 
     private static final Queue<Runnable> workers = new LinkedList<>();
     private static Thread mainThread = null;
@@ -18,14 +16,10 @@ public class Main {
     private static AtomicInteger myAtomic = new AtomicInteger(0);
     private static List<String> myList = new CopyOnWriteArrayList<>();
     private static Map<String, String> map = new ConcurrentHashMap<>();
-
     static final Object lock = new Object();
 
     static List<Thread> allThreads = new CopyOnWriteArrayList<>();
-
-
     static long value = 0;
-
     public static void main(String[] args) throws InterruptedException {
 
         BlockingQueue blockingQueue = new BlockingQueue(100);
@@ -47,10 +41,6 @@ public class Main {
             }, "pooler" + i);
             thread1.start();
         }
-
-
-
-
 //        for (int i = 0; i < 100; i++) {
 //            Thread thread = new Thread(new Runnable() {
 //                @Override
@@ -76,14 +66,12 @@ public class Main {
 //        }
 
     }
-
     private static void write() {
         synchronized (lock) {
             value = value + 1;
             System.out.println("increased value to: " + value + " by thread: " + Thread.currentThread().getName());
         }
     }
-
 //    static ReentrantLock reentrantLock = new ReentrantLock(true);
 
 //    private static void writeFair() {
@@ -95,11 +83,9 @@ public class Main {
 //            reentrantLock.unlock();
 //        }
 //    }
-
     private static void read() {
         synchronized (lock) {
             System.out.println(value);
         }
     }
-
 }

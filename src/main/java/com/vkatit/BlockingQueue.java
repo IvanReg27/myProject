@@ -13,7 +13,6 @@ public class BlockingQueue {
 
     private final Queue<String> queue = new LinkedList<>();
 
-
     private final Integer MAX_CAPACITY;
     private final Object lock = new Object();
 
@@ -39,7 +38,6 @@ public class BlockingQueue {
             }
         }
     }
-
     public void push(String newRecord) {
         synchronized (lock) {
             while (true) {
@@ -59,10 +57,8 @@ public class BlockingQueue {
             }
         }
     }
-
     ReentrantLock reentrantLock = new ReentrantLock();
     ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
-
 
     final Condition notFull = reentrantLock.newCondition();
     final Condition notEmpty = reentrantLock.newCondition();
@@ -77,19 +73,14 @@ public class BlockingQueue {
             readWriteLock.readLock();
         }
     }
-
     public void write(String data) {
         try {
             readWriteLock.writeLock();
 
-
             queue.add(data);
-
 
         } finally {
             readWriteLock.writeLock();
         }
     }
-
-
 }

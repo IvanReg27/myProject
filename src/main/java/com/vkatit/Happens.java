@@ -26,13 +26,8 @@ public class Happens {
                     }
                 }
             });
-
             second.start();
             first.start();
         }
-
-
-
-
     }
 }
