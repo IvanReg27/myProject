@@ -7,7 +7,7 @@ public class ThreadPool {
 
     public static void main(String[] args) {
         ExecutorService executor = Executors.newFixedThreadPool(5);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 6; i++) {
             Runnable worker = new WorkerThread(" " + i);
             executor.execute(worker);
         }

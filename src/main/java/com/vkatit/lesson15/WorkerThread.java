@@ -8,13 +8,13 @@ public class WorkerThread implements Runnable {
         this.command = s;
     }
     public void run() {
-        System.out.println(Thread.currentThread().getName() + " Start / command = " + command);
+        System.out.println(Thread.currentThread().getName() + " Start -> process = " + command);
         processCommand();
-        System.out.println(Thread.currentThread().getName() + " End");
+        System.out.println(Thread.currentThread().getName() + " Finish");
     }
     private void processCommand() {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
