@@ -1,4 +1,4 @@
-package com.vkatit.lesson15;
+package com.vkatit.lesson15_1;
 
 public class WorkerThread implements Runnable {
 
