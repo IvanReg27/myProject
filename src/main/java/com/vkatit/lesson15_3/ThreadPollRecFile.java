@@ -53,14 +53,14 @@ public class ThreadPollRecFile {
             new Thread(this);
         }
         public void run() {
-            try {
+            try{
                 //-------------------------------------------------
                 int a = (int) (Math.random() * 1_000_000);
                 ArrayList<Integer> number = new ArrayList<Integer>();
                 number.add(a);
-                //-------------------------------------------------
-            try(FileWriter writer = new FileWriter(new File("C:\\Users\\Ivan\\IdeaProjects\\lesson3_maven\\src\\main\\resources\\CSVDemo.csv"))) {
-                    writer.write(String.valueOf(number));
+                //------------------------------------------------
+            try(FileWriter writer = new FileWriter(new File("C:\\Users\\Ivan\\IdeaProjects\\lesson3_maven\\src\\main\\resources\\Demo.txt"))) {
+                    writer.write(name + " - " + number);
                     writer.flush();
                 }
                 catch(IOException ex){
@@ -72,7 +72,8 @@ public class ThreadPollRecFile {
                     Thread.sleep((int)(Math.random() * 1500));
                 }
                 printMessage(name + " completed");
-            } catch (InterruptedException e) {}
+            } catch (InterruptedException e) {
+            }
         }
     }
     public static void main(String args[]) {
