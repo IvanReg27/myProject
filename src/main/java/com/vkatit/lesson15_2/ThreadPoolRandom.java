@@ -4,12 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ExecutorService {
+public class ThreadPoolRandom {
     SimpleDateFormat sdf = null;
     private  final  int  COUNT = 5;
-    ExecutorService() {
+    ThreadPoolRandom() {
 
         sdf = new SimpleDateFormat("HH:mm:ss.S");
 
@@ -18,7 +19,7 @@ public class ExecutorService {
         CountDownLatch cdl3 = new CountDownLatch(COUNT);
         CountDownLatch cdl4 = new CountDownLatch(COUNT);
 
-        java.util.concurrent.ExecutorService executor = Executors.newFixedThreadPool(2);
+        ExecutorService executor = Executors.newFixedThreadPool(2);
 
         System.out.println("Start threads...");
 
@@ -66,6 +67,6 @@ public class ExecutorService {
         }
     }
     public static void main(String args[]) {
-        new ExecutorService();
+        new ThreadPoolRandom();
     }
 }
