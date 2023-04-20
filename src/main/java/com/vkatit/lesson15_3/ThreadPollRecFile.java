@@ -54,18 +54,18 @@ public class ThreadPollRecFile {
         }
         public void run() {
             try{
-                //-------------------------------------------------
+                //получил рандомно числа, положил их в лист
                 int a = (int) (Math.random() * 1_000_000);
                 ArrayList<Integer> number = new ArrayList<Integer>();
                 number.add(a);
-                //------------------------------------------------
+                //создал файл и положил туда числа из листа (пока не получается все числа записать, буфер???)
             try(FileWriter writer = new FileWriter(new File("C:\\Users\\Ivan\\IdeaProjects\\lesson3_maven\\src\\main\\resources\\Demo.txt"))) {
                     writer.write(name + " - " + number);
                     writer.flush();
                 }
                 catch(IOException ex){
                 }
-                //-------------------------------------------------
+                //создание рабочих потоков + рандомно слип для них + вешаем к ним ссылку рандомное число
                 for(int i = 0; i < COUNT; i++) {
                     printMessage(name + " - " + number);
                     latch.countDown();
