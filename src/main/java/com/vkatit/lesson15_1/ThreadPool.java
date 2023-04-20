@@ -14,6 +14,6 @@ public class ThreadPool {
         executor.shutdown();
         while (!executor.isTerminated()) {
         }
-        System.out.println("Finished all thread");
+        System.out.println("Finished all threads");
     }
 }

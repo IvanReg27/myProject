@@ -2,6 +2,7 @@ package com.vkatit.lesson15_2;
 
 import java.util.ArrayList;
 
+//Тренировака на одном потоке и передачей нагенеренного параметра
 public class ThreadRunnable {
 
     public static void main(String[] args) throws InterruptedException {
