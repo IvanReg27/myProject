@@ -1,6 +1,8 @@
 package com.vkatit.lesson15_2;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 //Тренировака на одном потоке и передачей нагенеренного параметра
 public class ThreadRunnable {
@@ -20,7 +22,7 @@ public class ThreadRunnable {
                 System.out.println("Start thread: " + Thread.currentThread().getName() + " process...");
 
                 int a = (int) (Math.random() * 1_000_000);
-                ArrayList<Integer> number = new ArrayList<Integer>();
+                List<Integer> number = new CopyOnWriteArrayList<>();
                 number.add(a);
 
                 try {

@@ -3,6 +3,8 @@ package com.vkatit.lesson15_2;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -54,7 +56,7 @@ public class ThreadPoolRandom {
         public void run() {
             try {
                 int a = (int) (Math.random() * 1_000_000);
-                ArrayList<Integer> number = new ArrayList<Integer>();
+                List<Integer> number = new CopyOnWriteArrayList<>();
                 number.add(a);
 
                 for(int i = 0; i < COUNT; i++) {

@@ -4,6 +4,8 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -56,7 +58,7 @@ public class ThreadPollRecFile {
             try{
                 //получил рандомно числа, положил их в лист
                 int a = (int) (Math.random() * 1_000_000);
-                ArrayList<Integer> number = new ArrayList<Integer>();
+                List<Integer> number = new CopyOnWriteArrayList<>();
                 number.add(a);
                 //создал файл и положил туда числа из листа (пока не получается все числа записать, буфер???)
             try(FileWriter writer = new FileWriter(new File("C:\\Users\\Ivan\\IdeaProjects\\" +
