@@ -9,28 +9,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-
 @RestController
 public class EmployeeController {
-
     @Autowired
     EmployeeRepository employeeRepository;
-
     @GetMapping("/employees")
     public ResponseEntity<Map<Long, Employee>> getEmployees() {
         return ResponseEntity.status(HttpStatus.OK).body(employeeRepository.getEmployees());
     }
-
     @GetMapping("/employee/{employeeId}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("employeeId") Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(employeeRepository.getEmployees().get(id));
     }
-
     @GetMapping("/employees/{search}")
     public ResponseEntity<Map<Long, Employee>> searchEmployees(@PathVariable("search") String searchQuery) {
         return ResponseEntity.status(HttpStatus.OK).body(employeeRepository.searchEmployees(searchQuery));
     }
-
     @GetMapping("/jobs")
     public ResponseEntity<Map<String, Job>> getChartData() {
         return ResponseEntity.status(HttpStatus.OK).body(employeeRepository.getChartData());

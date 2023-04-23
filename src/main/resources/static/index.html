@@ -11,7 +11,6 @@
             crossorigin="anonymous"></script>
 </head>
 <script>
-
     const loadAllEmployees = () => {
         let domain = window.location.origin;
         fetch(domain + '/employees')
@@ -28,7 +27,6 @@
                 }
             })
     }
-
     const loadEmployeesByRequest = () => {
         cleanEmployees();
         let domain = window.location.origin;
@@ -51,7 +49,6 @@
             alert('enter four characters to search');
         }
     }
-
     const cleanEmployees = () => {
         $("#employeeSearchGridBody").empty();
     }
@@ -62,10 +59,7 @@
         <img src="office.jpg" alt="Office" />
     </div>
 </div>
-
-
 <body onload="loadAllEmployees();">
-
 <div style="display:flex; justify-content: space-between">
     <div style="width: 300px">
         <table class="table table-striped" id="employeeGrid">
@@ -80,12 +74,10 @@
             </tbody>
         </table>
     </div>
-
     <div style="width: 1000px">
         <div>
             <input style="width: 100%" id="employeeSearchRequestId" placeholder="Enter employee search here">
         </div>
-
         <div style="display: flex; justify-content: space-around; width: 1000px; margin: 0 auto">
             <button type="button" onclick="loadEmployeesByRequest(); this.blur();" class="p-2 m-2 btn btn-secondary">
                 Search employees
@@ -95,7 +87,6 @@
                 Clean employees
             </button>
         </div>
-
         <div>
             <table class="table table-striped" id="employeeSearchGrid">
                 <thead id="employeeSearchGridHead">
@@ -111,7 +102,6 @@
             </table>
         </div>
     </div>
-
     <div>
         <a href="/chart.html" style="width: 300px" onclick="this.blur();"
            class="p-2 m-2 btn btn-danger" role="button" target="_blank">

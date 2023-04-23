@@ -13,12 +13,10 @@ class DemoApplicationTests {
     @LocalServerPort
     int randomPort;
     RestTemplate restTemplate;
-
     @BeforeEach
     public void init() {
         restTemplate = new RestTemplate();
     }
-
     @Autowired
     Environment environment;
 

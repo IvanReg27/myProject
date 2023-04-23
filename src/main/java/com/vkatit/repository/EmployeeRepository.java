@@ -14,10 +14,8 @@ import java.util.Map;
 
 @Repository
 public class EmployeeRepository {
-
     @Autowired
     JdbcTemplate jdbcTemplate;
-
     public Map<Long, Employee> getEmployees() {
         return jdbcTemplate.query("SELECT * FROM hr.employees\n" +
                 "JOIN hr.jobs ON hr.employees.job_id = hr.jobs.job_id\n" +
@@ -49,7 +47,6 @@ public class EmployeeRepository {
             }
         });
     }
-
     public Map<Long, Employee> searchEmployees(String searchQuery) {
         return jdbcTemplate.query("SELECT * FROM hr.employees\n" +
                 "JOIN hr.jobs ON hr.employees.job_id = hr.jobs.job_id\n" +
@@ -84,7 +81,6 @@ public class EmployeeRepository {
             }
         });
     }
-
     public Map<String, Job> getChartData() {
         return jdbcTemplate.query("SELECT hr.jobs.job_id, hr.jobs.job_title, AVG(hr.employees.salary)\n" +
                 "FROM hr.jobs\n" +

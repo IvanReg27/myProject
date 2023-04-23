@@ -1,6 +1,5 @@
 package com.vkatit;
 
-
 import org.mariadb.jdbc.MariaDbDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +10,6 @@ import java.sql.SQLException;
 
 @Configuration
 public class AppContext {
-
     @Bean ("mariaDataSource")
 public DataSource mariaDataSource() throws SQLException {
     MariaDbDataSource mariaDbDataSource = new MariaDbDataSource();
@@ -20,7 +18,6 @@ public DataSource mariaDataSource() throws SQLException {
         mariaDbDataSource.setPassword("xxx"); //вставить свой пароль из HeidiSQL
         return mariaDbDataSource;
 }
-
     @Bean
 public JdbcTemplate myJdbcTemplate(DataSource mariaDataSource) throws SQLException {
     return new JdbcTemplate(mariaDataSource);

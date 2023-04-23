@@ -11,7 +11,6 @@
           crossorigin="anonymous"></script>
 </head>
 <script>
-
   let domain = window.location.origin;
   let dataArray = [];
   fetch(domain + '/jobs')
@@ -21,9 +20,7 @@
               dataArray.push({label: value.jobTitle, y: value.averageSalary});
             }
           });
-
   window.onload = function () {
-
     var options = {
       title: {
         text: "Average salaries employee"
@@ -35,7 +32,6 @@
         }
       ]
     };
-
     $("#chartContainer").CanvasJSChart(options);
   }
 </script>
