@@ -1,7 +1,5 @@
 package com.vkatit;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnJava;
-
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.locks.Condition;

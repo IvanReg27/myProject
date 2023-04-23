@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-//Тренировака на одном потоке и передачей нагенеренного параметра
+//Тренировака на одном созданом потоке и передачей нагенеренного параметра
 public class ThreadRunnable {
 
     public static void main(String[] args) throws InterruptedException {
