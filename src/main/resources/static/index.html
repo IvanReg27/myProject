@@ -61,7 +61,6 @@
                 });
         }
     }
-
     const addNewEmployee = () => {
         const newEmployee = {
             employeeId: $("#newEmployeeId").val(),
@@ -89,17 +88,13 @@
             .then(data => alert('new employee: ' + JSON.stringify(data) + ' been added!'))
             .catch(error => alert('error occurred during saving new employee: ' + JSON.stringify(error)));
     }
-
-
     const reloadPage = () => {
         cleanEmployees();
         loadAllEmployees();
     }
-
     const cleanEmployees = () => {
         $("#employeeGridBody").empty();
     }
-
 </script>
 <body>
 <div class="container text-center my-5">
@@ -171,7 +166,6 @@
                 <input id="newDepartmentId" placeholder="Put new department Id here">
             </div>
         </div>
-
         <!--add missing components-->
         <button type="button" onclick="loadAllEmployees()" class="p-2 m-2 btn btn-primary">Show employees</button>
         <!--<button type="button" onclick="loadEmployeeById()" class="p-2 m-2 btn btn-primary">Show employee by ID</button>-->

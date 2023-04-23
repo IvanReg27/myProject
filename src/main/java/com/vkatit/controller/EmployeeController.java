@@ -11,17 +11,14 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     EmployeeRepository employeeRepository;
-
     @GetMapping("/employees")
     public List<Employee> getAllEmployees() {
         return employeeRepository.getAllEmployees();
     }
-
     @GetMapping("/employees/{employeeId}")
     public Employee getEmployeeById(@PathVariable("employeeId") Long id) {
         return employeeRepository.getEmployeeById(id);
     }
-
     @PostMapping("/employees")
     public Employee addNewEmployee(@RequestBody Employee employee) {
         employeeRepository.createNewEmployee(employee);

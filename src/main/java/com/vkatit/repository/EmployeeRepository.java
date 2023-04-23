@@ -15,13 +15,10 @@ import java.util.Map;
 
 @Repository
 public class EmployeeRepository {
-
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
     @Autowired
     JdbcTemplate jdbcTemplate;
-
     public void createNewEmployee(Employee employee) {
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("employee_id", employee.getEmployeeId());
@@ -40,7 +37,6 @@ public class EmployeeRepository {
                 parameters
         );
     }
-
     public Employee getEmployeeById(Long id){
         return jdbcTemplate.queryForObject("SELECT * FROM hr.employees WHERE EMPLOYEE_ID = " + id, new RowMapper<Employee>() {
             @Override

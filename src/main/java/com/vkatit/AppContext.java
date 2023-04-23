@@ -27,12 +27,10 @@ public class AppContext {
         mariaDbDataSource.setPassword("xxx"); //ввести пароль HeidiSQL
         return mariaDbDataSource;
     }
-
     @Bean
     public NamedParameterJdbcTemplate myNamedParameterJdbcTemplate(DataSource mariaDataSource) throws SQLException {
         return new NamedParameterJdbcTemplate(mariaDataSource);
     }
-
     @Bean
     public JdbcTemplate myJdbcTemplate(DataSource mariaDataSource) throws SQLException {
         return new JdbcTemplate(mariaDataSource);
