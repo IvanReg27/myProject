@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class Employee {
-
     @JsonField(defaultValue="Ivan")
     private String firstName;
     private String lastName;

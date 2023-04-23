@@ -9,7 +9,6 @@ import java.lang.reflect.Field;
 
 public class JacksonConvertTest {
     ObjectMapper objectMapper = new ObjectMapper();
-
     @Test
     void employeeToJson() throws JsonProcessingException, IllegalAccessException {
 

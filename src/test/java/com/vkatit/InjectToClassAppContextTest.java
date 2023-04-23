@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Field;
 
 public class InjectToClassAppContextTest {
-
     @Test
     void InjectToClass() {
         InjectToClassAppContext injectToClassAppContext = new InjectToClassAppContext();
