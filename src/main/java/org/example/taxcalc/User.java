@@ -12,19 +12,15 @@ class User {
         this.yearIncome = yearIncome;
         this.monthOfWork = monthOfWork;
     }
-
     public Region getRegion() {
         return region;
     }
-
     public String getFullName() {
         return fullName;
     }
-
     public Float getYearIncome() {
         return yearIncome;
     }
-
     public Integer getMonthOfWork() {
         return monthOfWork;
     }

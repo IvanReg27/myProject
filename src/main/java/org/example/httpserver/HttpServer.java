@@ -15,14 +15,12 @@ public class HttpServer {
     
     private static UserApi userApi = UserApi.getInstance();
     private static CityApi City100RandomApi = CityApi.getInstance();
-    
     public static void main(String[] args) throws IOException {
         com.sun.net.httpserver.HttpServer server = com.sun.net.httpserver.HttpServer.create(new InetSocketAddress(8500), 0);
         HttpContext context = server.createContext("/");
         context.setHandler(org.example.httpserver.HttpServer::handleRequest);
         server.start();
     }
-
     public static void handleRequest(HttpExchange exchange) throws IOException {
         byte[] responseByteArray = null;
         if (exchange.getRequestURI().getPath().contains("city")) {
@@ -32,17 +30,14 @@ public class HttpServer {
         }
         sendResponse(exchange, responseByteArray);
     }
-    
     private static byte[] City100RandomApi() {
         return (new Gson().toJson(City100RandomApi.getOnlyFirst100cities())).getBytes(StandardCharsets.UTF_8);
     }
-    
     private static byte[] getStaticData(HttpExchange exchange) {
         String filePath = exchange.getRequestURI().getPath().replaceFirst("/", "");
         byte[] content = getFileAsByteArray(filePath);
         return content == null ? new byte[]{} : content;
     }
-    
     private static void sendResponse(HttpExchange exchange, byte content[]) throws IOException {
         exchange.sendResponseHeaders(200, content.length);
         OutputStream os = exchange.getResponseBody();

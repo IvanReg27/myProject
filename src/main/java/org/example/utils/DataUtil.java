@@ -15,7 +15,6 @@ public class DataUtil {
             return new byte[]{};
         }
     }
-    
     public static File getFileByPath(String filePath) {
         try {
             URL resource = DataUtil.class.getClassLoader().getResource(filePath);
@@ -24,7 +23,6 @@ public class DataUtil {
             return null;
         }
     }
-    
     public static String getFileAsString(String filePath) {
         byte[] file = getFileAsByteArray(filePath);
         try {

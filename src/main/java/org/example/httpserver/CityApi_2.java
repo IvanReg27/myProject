@@ -30,7 +30,6 @@ public class CityApi_2 {
 //        }
 //        System.out.println(cityRondom100.get(6));
     }
-    
     public static List<CityApi_2> ReceiveCitiRandom() throws URISyntaxException, IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder(new URI("https://gist.githubusercontent.com/isicju/57f52dc77344eba300d6c6b051b29187/raw/1a2ff4fc5faa1ba58f7c3fcbb0d47dbd15baa340/cities")).build();
         HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
@@ -53,11 +52,9 @@ public class CityApi_2 {
         
         return cityList100;
     }
-    
     public static int getRandomNumber() throws IOException {
         return (int) ((Math.random() * (fileLineMeter() - 1)) + 1);
     }
-    
     public static int fileLineMeter() throws IOException {
         int linesInFile = 0;
         try (var reader = new BufferedReader(new FileReader(fileName))) {
@@ -76,4 +73,3 @@ public class CityApi_2 {
 //        return cityRondom100;
 //    }
 }
-

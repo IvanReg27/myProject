@@ -5,19 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserApiService {
-
     private List<User> users = new ArrayList<>();
-
     private static final UserApiService instance = new UserApiService();
-
     private UserApiService() {
-
     }
-
     public static UserApiService getInstance() {
         return instance;
     }
-
     public List<User> getUsers() {
         return users;
     }

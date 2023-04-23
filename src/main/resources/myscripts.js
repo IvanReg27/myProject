@@ -4,7 +4,6 @@ document.onreadystatechange = function () {
         initFirstMapView();
     }
 }
-
 function loadCountries() {
 const Http = new XMLHttpRequest();
 const url = 'http://185.106.92.148:8500/city';
@@ -25,20 +24,17 @@ Http.onreadystatechange = (e) => {
     }
 }
 }
-
 function initFirstMapView() {
     let map = L.map('map').setView([41.637, 41.679], 12);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19
     }).addTo(map);
 }
-
 function setMapLatitudeAndLongitude(latitude, longitude) {
     resetMap();
     let map = L.map('map').setView([latitude, longitude], 10);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19}).addTo(map);
 }
-
 function findCityDataByCityName(cityName) {
     let cityDataResult = null;
     for (let cityData of citiesData){
@@ -49,13 +45,11 @@ function findCityDataByCityName(cityName) {
     }
     return cityDataResult;
 }
-
 function resetMap() {
     if (L.DomUtil.get('map')) {
         L.DomUtil.get('map')._leaflet_id = null;
     }
 }
-
 function showSelectedCity() {
     let cityName = document.getElementById("currentCityNameId").value;
     if (cityName) {
@@ -65,7 +59,6 @@ function showSelectedCity() {
         }
     }
 }
-
 function addCityByName(countryName) {
     let my_list = document.getElementById("Country");
     my_list.innerHTML = my_list.innerHTML + '<option value="' + countryName + '">';

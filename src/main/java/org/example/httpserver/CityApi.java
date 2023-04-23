@@ -23,7 +23,6 @@ public class CityApi {
     private CityApi() throws IOException {
         onlyFirst100cities = random100Cities(initCitiesFromUrl(), 100);
     }
-    
     private List<City> initCitiesFromUrl() throws IOException {
         RestTemplate restTemplate = new RestTemplate();
         String fooResourceUrl = "https://gist.githubusercontent.com/isicju/57f52dc77344eba300d6c6b051b29187/raw/1a2ff4fc5faa1ba58f7c3fcbb0d47dbd15baa340/cities";
@@ -38,7 +37,6 @@ public class CityApi {
         }
         return rawCities;
     }
-    
     private static List<City> random100Cities(List<City> city, int maxSize) {
         List<City> subCities = new ArrayList<>();
         for (int i = 0; i < maxSize; i++) {
@@ -46,11 +44,9 @@ public class CityApi {
         }
         return subCities;
     }
-    
     public List<City> getOnlyFirst100cities() {
         return onlyFirst100cities;
     }
-    
     public static CityApi getInstance() {
         return instance;
     }
