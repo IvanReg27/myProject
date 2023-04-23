@@ -18,23 +18,18 @@ class DemoApplicationTests {
     @LocalServerPort
     int randomPort;
     RestTemplate restTemplate;
-
     @BeforeEach
     public void init() {
         restTemplate = new RestTemplate();
     }
-
     @Autowired
     Environment environment;
-
     @Autowired
     ApplicationContext applicationContext;
-
     @Test
     void contextLoads() {
         MatcherAssert.assertThat(applicationContext, is(notNullValue()));
     }
-
     @Test
     public void testCountries() {
         Country[] countries = restTemplate.getForObject("http://localhost:" + randomPort + "/countries", Country[].class);

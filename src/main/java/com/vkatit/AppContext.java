@@ -12,17 +12,13 @@ import org.springframework.core.io.Resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 @Configuration
 public class AppContext {
     @Value("classpath:citizen10.json")
     Resource citizenResource;
-
     @Value("classpath:countries.json")
     Resource countriesResource;
-
     @Bean
     public List<Citizen> citizens() {
         try (InputStream inputStream = citizenResource.getInputStream()) {

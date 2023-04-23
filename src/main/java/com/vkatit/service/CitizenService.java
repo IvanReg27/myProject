@@ -9,7 +9,6 @@ import java.util.List;
 public class CitizenService {
     @Autowired
     List<Citizen> citizens;
-
     public void addNewCitizen(Citizen citizen) {
         citizens.add(citizen);
     }
