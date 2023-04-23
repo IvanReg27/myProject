@@ -27,7 +27,6 @@ public class CitizenService {
                 .filter(citizens -> citizens.getCountry().equals(country))
                 .collect(Collectors.toList());
     }
-
     public List<Citizen> tenCitizensMaxId(Long id) {
         return citizenList.stream()
                 .sorted(Comparator.comparing(Citizen::getId))
@@ -58,8 +57,6 @@ public class CitizenService {
                 .distinct()
                 .collect(Collectors.toList());
     }
-
-
     public Citizen firstCitizensFourChars(Integer length) {
         return citizenList.stream()
                 .filter(s -> s.getFirstName().length() == length)

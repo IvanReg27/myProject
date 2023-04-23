@@ -17,10 +17,8 @@ import java.util.List;
 
 @TestConfiguration
 public class AppContext {
-
     @Value("classpath:citizen100.json")
     Resource citizenResource;
-
     @Bean("citizenList")
     public List<Citizen> citizens() {
         try (InputStream inputStream = citizenResource.getInputStream()) {

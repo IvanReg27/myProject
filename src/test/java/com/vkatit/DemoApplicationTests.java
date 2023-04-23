@@ -27,12 +27,10 @@ public class DemoApplicationTests {
     @LocalServerPort
     private int randomPort;
     private RestTemplate restTemplate;
-
     @BeforeEach
     public void init() {
         restTemplate = new RestTemplate();
     }
-
     @Test
     @DisplayName("Citizens living in a given country")
     public void countryAndCitizens() {
@@ -50,7 +48,6 @@ public class DemoApplicationTests {
         assertEquals(citizens[0], fromGuatemala);
         assertEquals(citizens.length, 1);
     }
-
     @Test
     @DisplayName("All countries where citizens live (no repetitions(DISTINCT)")
     public void countriesDISTINCT() {
@@ -69,7 +66,6 @@ public class DemoApplicationTests {
 
         assertArrayEquals(countries, actualCountries);
     }
-
     @Test
     @DisplayName("Map that contains the key of the citizen's ID and the value of the citizen")
     public void map() throws JsonProcessingException {

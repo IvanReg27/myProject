@@ -18,17 +18,14 @@ import java.util.Map;
 
 public class CitizenController {
     private final CitizenService service;
-
     @GetMapping("/country/{name}")
     public ResponseEntity<List<Citizen>> citizensLivingInThatCountry(@PathVariable String name) {
         return ResponseEntity.ok(service.citizensLivingInThatCountry(name));
     }
-
     @GetMapping("/allCountriesDIST")
     public ResponseEntity<List<String>> allCountryDoNotRepeat() {
         return ResponseEntity.ok(service.allCountryDoNotRepeat());
     }
-
     @GetMapping("/map")
     public ResponseEntity<Map<Long, Citizen>> mapIdCitizenForAllValue() {
         return ResponseEntity.ok(service.mapIdCitizenForAllValue());
