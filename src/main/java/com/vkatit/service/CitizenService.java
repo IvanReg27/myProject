@@ -33,24 +33,6 @@ public class CitizenService {
                 .limit(10)
                 .collect(Collectors.toList());
     }
-
-    //пока не получилось реализовать через заданный диапазон (от ... до ...)
-
-//    public List<Citizen> allCitizensRangeDate(LocalDateTime birthDate) {
-//        return citizenList.stream()
-//                .filter(citizens -> citizens.getBirthDate().equals("1990"))
-//                .filter(citizens -> citizens.getBirthDate().equals("1991"))
-//                .filter(citizens -> citizens.getBirthDate().equals("1992"))
-//                .filter(citizens -> citizens.getBirthDate().equals("1993"))
-//                .filter(citizens -> citizens.getBirthDate().equals("1994"))
-//                .filter(citizens -> citizens.getBirthDate().equals("1995"))
-//                .filter(citizens -> citizens.getBirthDate().equals("1996"))
-//                .filter(citizens -> citizens.getBirthDate().equals("1997"))
-//                .filter(citizens -> citizens.getBirthDate().equals("1998"))
-//                .filter(citizens -> citizens.getBirthDate().equals("1999"))
-//                .collect(Collectors.toList());
-//    }
-
     public List<String> allCountryDoNotRepeat() {
         return citizenList.stream()
                 .map(Citizen::getCountry)
@@ -62,15 +44,6 @@ public class CitizenService {
                 .filter(s -> s.getFirstName().length() == length)
                 .findFirst().orElseThrow(CitizenNotFound::new);
     }
-
-    //не получилось реализовать т.к. ДР тип String (конвертировать надо...но есть символы "-" и ".")
-
-//    public List<Citizen> averageDateAllCitizens(LocalDateTime birthDate) {
-//        return citizenList.stream()
-//                .filter(citizens -> citizens.getBirthDate())
-//                .mapToInt(Citizen::getBirthDate)
-//                .average().getAsDouble();
-//    }
     public Map<Long, Citizen> mapIdCitizenForAllValue() {
         return citizenList.stream()
                 .collect(Collectors.toMap(Citizen::getId, Function.identity()));
@@ -79,12 +52,4 @@ public class CitizenService {
         return citizenList.stream()
                 .collect(Collectors.groupingBy(Citizen::getCountry));
     }
-
-    //не уверен, что правильно (split?)
-
-//    public List<String> splitStringIntoWords() {
-//        return citizenList.stream()
-//            .flatMap(pair -> Stream.of(pair.split("\\s")))
-//            .collect(Collectors.toList());
-//    }
 }
